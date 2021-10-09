@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class Register : AppCompatActivity() {
     private lateinit var editTextName:EditText
@@ -24,6 +25,7 @@ class Register : AppCompatActivity() {
     private lateinit var editTextPassword:EditText
     private lateinit var progressBar:ProgressBar
     private lateinit var fAuth:FirebaseAuth
+    private lateinit var fUser:FirebaseUser
     private lateinit var registerButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +39,7 @@ class Register : AppCompatActivity() {
         editTextPassword = findViewById(R.id.editPasswordAddress)
         progressBar = findViewById(R.id.progressBar)
         fAuth = FirebaseAuth.getInstance()
+        fUser = fAuth.currentUser!!
         registerButton = findViewById(R.id.RegistrationButton)
         registerButton.setOnClickListener{
             performAuth()
