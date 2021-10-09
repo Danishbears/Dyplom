@@ -20,6 +20,12 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        loginMail = findViewById(R.id.editLoginEmailAddress)
+        loginPassword = findViewById(R.id.editLoginPasswordAddress)
+        loginButton = findViewById(R.id.LoginButton)
+        fAuth = FirebaseAuth.getInstance()
+        loginToRegText = findViewById(R.id.RegisterText)
+        progressBar = findViewById(R.id.progressBarLogin)
 
     }
 }
