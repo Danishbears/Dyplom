@@ -6,7 +6,7 @@
     <string name="Favorites">Favorites</string>
     <string name="cart">Cart</string>
     <string name="more">More</string>
-    <string name="Dwonesh">Dwonesh</string>
+    <string name="AppName">Dwonesh</string>
     <string name="CreateNew">Create new Account</string>
     <string name="LastName">Last Name</string>
     <string name="Name">Name</string>
@@ -14,5 +14,8 @@
     <string name="Email">Email</string>
     <string name="Phone">Phone Number</string>
     <string name="Register">REGISTER</string>
+    <string name="Login">Login</string>
     <string name="LoginText">Have an account? Click here</string>
+    <string name="RegisterText">Do not have an account? Click here</string>
+    <string name="Authorization">Authorization</string>
 </resources>

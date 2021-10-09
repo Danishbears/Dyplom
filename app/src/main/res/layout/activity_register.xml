@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/allan_bold"
-        android:text="@string/Dwonesh"
+        android:text="@string/AppName"
         android:textColorHint="@color/purple_200"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -106,7 +106,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editName" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/RegistrationButton"
         android:layout_width="133dp"
         android:layout_height="48dp"
         android:layout_marginStart="128dp"
@@ -119,7 +119,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editPasswordAddress" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="112dp"
@@ -127,7 +127,7 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/RegistrationButton"
         app:layout_constraintVertical_bias="0.072" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
