@@ -95,7 +95,7 @@ class Register : AppCompatActivity() {
 
     private fun currentUser(){
         if(fAuth.currentUser != null){
-            startActivity(Intent(applicationContext,HomeFragment::class.java))
+            startActivity(Intent(applicationContext,MainActivity::class.java))
             finish()
         }
     }
