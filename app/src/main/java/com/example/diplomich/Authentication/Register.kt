@@ -40,6 +40,7 @@ class Register : AppCompatActivity() {
         editTextPhoneNumber = findViewById(R.id.editTextPhone)
         editTextPassword = findViewById(R.id.editPasswordAddress)
         progressBar = findViewById(R.id.progressBar)
+        textToLogin = findViewById(R.id.textToLogin)
        // fAuth = Firebase.auth
         fAuth = FirebaseAuth.getInstance()
         //fUser = FirebaseAuth.getInstance().currentUser as FirebaseUser
@@ -48,8 +49,11 @@ class Register : AppCompatActivity() {
         registerButton.setOnClickListener{
             performAuth()
         }
-
+        textToLogin.setOnClickListener{
+            startActivity(Intent(applicationContext,LoginActivity::class.java))
+        }
     }
+
     private fun performAuth(){
        var email:String = editTextEmail.text.toString().trim()
        var password:String = editTextPassword.text.toString().trim()
