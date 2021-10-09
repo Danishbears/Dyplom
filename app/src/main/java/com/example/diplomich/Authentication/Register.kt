@@ -10,12 +10,16 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.diplomich.HomeFragment
+import com.example.diplomich.MainActivity
 import com.example.diplomich.R
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class Register : AppCompatActivity() {
     private lateinit var editTextName:EditText
@@ -38,6 +42,7 @@ class Register : AppCompatActivity() {
         editTextPhoneNumber = findViewById(R.id.editTextPhone)
         editTextPassword = findViewById(R.id.editPasswordAddress)
         progressBar = findViewById(R.id.progressBar)
+       // fAuth = Firebase.auth
         fAuth = FirebaseAuth.getInstance()
         //fUser = FirebaseAuth.getInstance().currentUser as FirebaseUser
         registerButton = findViewById(R.id.RegistrationButton)
@@ -48,8 +53,8 @@ class Register : AppCompatActivity() {
 
     }
     private fun performAuth(){
-       var email:String = editTextEmail.toString().trim()
-       var password:String = editTextPassword.toString().trim()
+       var email:String = editTextEmail.text.toString().trim()
+       var password:String = editTextPassword.text.toString().trim()
         if(TextUtils.isEmpty(email)){
             editTextEmail.error = "Email is Required"
             return
@@ -65,21 +70,29 @@ class Register : AppCompatActivity() {
 //to check a special characters !!
         progressBar.visibility = View.VISIBLE
 
-        fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(
-            OnCompleteListener {
-                onComplete(it)
-            })
+        fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this) {task->
+                onComplete(task)
+               /* if(task.isSuccessful){
+                    Toast.makeText(this,"User Created",Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(applicationContext,HomeFragment::class.java))
+
+                }else{
+                    Toast.makeText(this," ERROR! " + task.exception!!.message,Toast.LENGTH_SHORT).show()
+                }*/
+            }
 
     }
+
     private fun onComplete(task: Task<AuthResult>) {
         if(task.isSuccessful){
             Toast.makeText(this,"User Created",Toast.LENGTH_SHORT).show()
-            startActivity(Intent(applicationContext,HomeFragment::class.java))
+            startActivity(Intent(applicationContext,MainActivity::class.java))
 
         }else{
             Toast.makeText(this," ERROR! " + task.exception!!.message,Toast.LENGTH_SHORT).show()
         }
     }
+
     private fun currentUser(){
         if(fAuth.currentUser != null){
             startActivity(Intent(applicationContext,HomeFragment::class.java))
