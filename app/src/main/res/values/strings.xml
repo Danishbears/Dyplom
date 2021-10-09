@@ -7,5 +7,12 @@
     <string name="cart">Cart</string>
     <string name="more">More</string>
     <string name="Dwonesh">Dwonesh</string>
-
+    <string name="CreateNew">Create new Account</string>
+    <string name="LastName">Last Name</string>
+    <string name="Name">Name</string>
+    <string name="Password">Password</string>
+    <string name="Email">Email</string>
+    <string name="Phone">Phone Number</string>
+    <string name="Register">REGISTER</string>
+    <string name="LoginText">Have an account? Click here</string>
 </resources>
