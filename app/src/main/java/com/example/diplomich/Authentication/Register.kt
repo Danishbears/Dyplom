@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import com.example.diplomich.HomeFragment
 import com.example.diplomich.MainActivity
 import com.example.diplomich.R
@@ -31,6 +28,7 @@ class Register : AppCompatActivity() {
     private lateinit var fAuth:FirebaseAuth
     private lateinit var fUser:FirebaseUser
     private lateinit var registerButton: Button
+    private lateinit var textToLogin:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
