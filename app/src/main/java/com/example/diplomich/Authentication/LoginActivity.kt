@@ -34,6 +34,10 @@ class LoginActivity : AppCompatActivity() {
             performLogin()
         }
 
+        loginToRegText.setOnClickListener{
+            startActivity(Intent(applicationContext,Register::class.java))
+        }
+
     }
     private fun performLogin(){
         var email:String = loginMail.text.toString().trim()
