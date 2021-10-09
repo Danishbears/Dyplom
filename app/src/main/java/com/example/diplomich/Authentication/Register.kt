@@ -39,8 +39,9 @@ class Register : AppCompatActivity() {
         editTextPassword = findViewById(R.id.editPasswordAddress)
         progressBar = findViewById(R.id.progressBar)
         fAuth = FirebaseAuth.getInstance()
-        fUser = fAuth.currentUser!!
+        //fUser = FirebaseAuth.getInstance().currentUser as FirebaseUser
         registerButton = findViewById(R.id.RegistrationButton)
+        currentUser()
         registerButton.setOnClickListener{
             performAuth()
         }
@@ -77,6 +78,12 @@ class Register : AppCompatActivity() {
 
         }else{
             Toast.makeText(this," ERROR! " + task.exception!!.message,Toast.LENGTH_SHORT).show()
+        }
+    }
+    private fun currentUser(){
+        if(fAuth.currentUser != null){
+            startActivity(Intent(applicationContext,HomeFragment::class.java))
+            finish()
         }
     }
 }
