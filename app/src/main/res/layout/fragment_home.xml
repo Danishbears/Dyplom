@@ -14,11 +14,12 @@
         android:layout_height="match_parent"
         android:text="@string/Home" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/buttonPacaton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
+        android:background="@drawable/custom_button"
         android:text="HUI "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
