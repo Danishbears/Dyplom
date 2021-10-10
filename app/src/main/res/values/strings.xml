@@ -18,4 +18,5 @@
     <string name="LoginText">Have an account? Click here</string>
     <string name="RegisterText">Do not have an account? Click here</string>
     <string name="Authorization">Authorization</string>
+    <string name="ForgetPassword">Forgot Password?</string>
 </resources>
