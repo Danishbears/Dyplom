@@ -11,6 +11,7 @@ import com.example.diplomich.R
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import org.w3c.dom.Text
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var loginMail:EditText
@@ -19,6 +20,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var fAuth:FirebaseAuth
     private lateinit var loginToRegText:TextView
     private lateinit var progressBar:ProgressBar
+    private lateinit var forgetPassword:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
         fAuth = FirebaseAuth.getInstance()
         loginToRegText = findViewById(R.id.RegisterText)
         progressBar = findViewById(R.id.progressBarLogin)
+        forgetPassword = findViewById(R.id.textForgetPassword)
 
         loginButton.setOnClickListener{
             performLogin()
