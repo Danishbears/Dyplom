@@ -25,4 +25,5 @@
     <string name="ResetEmail">Enter Your Email To Received Message</string>
     <string name="ResetLinkSent">Reset Link Sent to Your Email</string>
     <string name="ResetLinkFailed">Reset link is not sent!</string>
+    <string name="HelloToUser">Hello</string>
 </resources>
