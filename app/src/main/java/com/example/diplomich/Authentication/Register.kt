@@ -56,11 +56,11 @@ class Register : AppCompatActivity() {
     }
 
     private fun performAuth(){
-       var email:String = editTextEmail.text.toString().trim()
-       var password:String = editTextPassword.text.toString().trim()
-       var Name:String = editTextName.text.toString().trim()
-       var Surname:String = editTextSurname.text.toString().trim()
-       var phoneNumber:String = editTextPhoneNumber.text.toString().trim()
+       val email:String = editTextEmail.text.toString().trim()
+       val password:String = editTextPassword.text.toString().trim()
+       val Name:String = editTextName.text.toString().trim()
+       val Surname:String = editTextSurname.text.toString().trim()
+       val phoneNumber:String = editTextPhoneNumber.text.toString().trim()
 
         if(TextUtils.isEmpty(email)){
             editTextEmail.error = "Email is Required"
@@ -95,7 +95,9 @@ class Register : AppCompatActivity() {
             Toast.makeText(this,"User Created",Toast.LENGTH_SHORT).show()
             userId = fAuth.currentUser!!.uid
             var documentReference:DocumentReference = fStore.collection("users").document(userId)
+
             var user:HashMap<String,Any?> = buildCategories(Name,Surname,phoneNumber,email)
+
             documentReference.set(user).addOnSuccessListener {
                 Log.d("TAG", "onSuccess: user profile is created for$userId")
             }
