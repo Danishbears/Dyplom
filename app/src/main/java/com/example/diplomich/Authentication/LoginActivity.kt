@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import com.example.diplomich.MainActivity
 import com.example.diplomich.R
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import org.w3c.dom.Text
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var loginMail:EditText
@@ -41,6 +41,10 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(applicationContext,Register::class.java))
         }
 
+        forgetPassword.setOnClickListener{
+            resetPass(it)
+        }
+
     }
     private fun performLogin(){
         var email:String = loginMail.text.toString().trim()
@@ -65,6 +69,7 @@ class LoginActivity : AppCompatActivity() {
             task->onCompleteLogin(task)
         }
     }
+
     private fun onCompleteLogin(task: Task<AuthResult>) {
         if(task.isSuccessful){
             Toast.makeText(this,"Login successfully", Toast.LENGTH_SHORT).show()
@@ -73,5 +78,24 @@ class LoginActivity : AppCompatActivity() {
         }else{
             Toast.makeText(this," ERROR! " + task.exception!!.message, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun resetPass(view: View) {
+        val passwordEditText = EditText(this)
+        val builder = AlertDialog.Builder(view.context)
+        builder.setTitle(R.string.ResetDialog)
+        builder.setMessage(R.string.ResetEmail)
+        builder.setView(passwordEditText)
+        builder.setPositiveButton(R.string.Yes){dialog,_ ->
+            var mail:String = passwordEditText.text.toString()
+            fAuth.sendPasswordResetEmail(mail).addOnSuccessListener {
+                Toast.makeText(this,R.string.ResetLinkSent,Toast.LENGTH_SHORT).show()
+            }
+                .addOnFailureListener {
+                    Toast.makeText(this,it.message,Toast.LENGTH_LONG).show()
+                }
+        }
+        builder.setNegativeButton(R.string.No,null)
+        builder.create().show()
     }
 }

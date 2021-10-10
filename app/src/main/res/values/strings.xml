@@ -19,4 +19,10 @@
     <string name="RegisterText">Do not have an account? Click here</string>
     <string name="Authorization">Authorization</string>
     <string name="ForgetPassword">Forgot Password?</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="ResetDialog">Reset Password?</string>
+    <string name="ResetEmail">Enter Your Email To Received Message</string>
+    <string name="ResetLinkSent">Reset Link Sent to Your Email</string>
+    <string name="ResetLinkFailed">Reset link is not sent!</string>
 </resources>
