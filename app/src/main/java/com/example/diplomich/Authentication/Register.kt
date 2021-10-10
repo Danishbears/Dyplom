@@ -4,19 +4,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.*
-import com.example.diplomich.HomeFragment
 import com.example.diplomich.MainActivity
 import com.example.diplomich.R
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
-import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
 
 class Register : AppCompatActivity() {
     private lateinit var editTextName:EditText
@@ -29,6 +27,8 @@ class Register : AppCompatActivity() {
     private lateinit var fUser:FirebaseUser
     private lateinit var registerButton: Button
     private lateinit var textToLogin:TextView
+    private lateinit var fStore:FirebaseFirestore
+    private lateinit var userId:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +41,12 @@ class Register : AppCompatActivity() {
         editTextPassword = findViewById(R.id.editPasswordAddress)
         progressBar = findViewById(R.id.progressBar)
         textToLogin = findViewById(R.id.textToLogin)
-       // fAuth = Firebase.auth
+        fStore = FirebaseFirestore.getInstance()
         fAuth = FirebaseAuth.getInstance()
-        //fUser = FirebaseAuth.getInstance().currentUser as FirebaseUser
         registerButton = findViewById(R.id.RegistrationButton)
+
         currentUser()
+
         registerButton.setOnClickListener{
             performAuth()
         }
@@ -57,6 +58,10 @@ class Register : AppCompatActivity() {
     private fun performAuth(){
        var email:String = editTextEmail.text.toString().trim()
        var password:String = editTextPassword.text.toString().trim()
+       var Name:String = editTextName.text.toString().trim()
+       var Surname:String = editTextSurname.text.toString().trim()
+       var phoneNumber:String = editTextPhoneNumber.text.toString().trim()
+
         if(TextUtils.isEmpty(email)){
             editTextEmail.error = "Email is Required"
             return
@@ -73,21 +78,27 @@ class Register : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
 
         fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this) {task->
-                onComplete(task)
-               /* if(task.isSuccessful){
-                    Toast.makeText(this,"User Created",Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(applicationContext,HomeFragment::class.java))
-
-                }else{
-                    Toast.makeText(this," ERROR! " + task.exception!!.message,Toast.LENGTH_SHORT).show()
-                }*/
+                onComplete(task,Name,Surname,phoneNumber,email)
+                buildCategories(Name,Surname,phoneNumber,email)
             }
 
     }
 
-    private fun onComplete(task: Task<AuthResult>) {
+    private fun onComplete(
+        task: Task<AuthResult>,
+        Name: String,
+        Surname: String,
+        phoneNumber: String,
+        email: String
+    ) {
         if(task.isSuccessful){
             Toast.makeText(this,"User Created",Toast.LENGTH_SHORT).show()
+            userId = fAuth.currentUser!!.uid
+            var documentReference:DocumentReference = fStore.collection("users").document(userId)
+            var user:HashMap<String,Any?> = buildCategories(Name,Surname,phoneNumber,email)
+            documentReference.set(user).addOnSuccessListener {
+                Log.d("TAG", "onSuccess: user profile is created for$userId")
+            }
             startActivity(Intent(applicationContext,MainActivity::class.java))
 
         }else{
@@ -100,5 +111,17 @@ class Register : AppCompatActivity() {
             startActivity(Intent(applicationContext,MainActivity::class.java))
             finish()
         }
+    }
+
+    private fun buildCategories(Name: String,
+                                Surname: String,
+                                phoneNumber: String,
+                                email: String):HashMap<String,Any?>{
+        return hashMapOf(
+           "Name" to Name,
+           "Surname" to Surname,
+           "Email" to email,
+           "PhoneNumber" to phoneNumber
+        )
     }
 }
