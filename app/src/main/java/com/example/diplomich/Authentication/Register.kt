@@ -92,6 +92,10 @@ class Register : AppCompatActivity() {
         email: String
     ) {
         if(task.isSuccessful){
+
+            //send verification link
+            verificationEmail()
+
             Toast.makeText(this,"User Created",Toast.LENGTH_SHORT).show()
             userId = fAuth.currentUser!!.uid
             var documentReference:DocumentReference = fStore.collection("users").document(userId)
@@ -126,4 +130,15 @@ class Register : AppCompatActivity() {
            "PhoneNumber" to phoneNumber
         )
     }
+
+    private fun verificationEmail(){
+        val user:FirebaseUser = fAuth.currentUser!!
+        user.sendEmailVerification().addOnSuccessListener {
+            Toast.makeText(this,R.string.VerificationEmail,Toast.LENGTH_SHORT).show()
+        }
+            .addOnFailureListener{
+                Log.d("TAG","On Failure ${it.message}")
+            }
+    }
+
 }
