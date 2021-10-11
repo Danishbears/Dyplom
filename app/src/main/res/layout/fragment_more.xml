@@ -12,8 +12,8 @@
         android:id="@+id/HelloUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="52dp"
         android:text="@string/more"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -57,11 +57,12 @@
         android:id="@+id/verificationEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="TextView"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/HelloUserName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.382"
+        app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent" />
 
 
