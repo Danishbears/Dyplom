@@ -23,6 +23,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         buttonLogOut = rootView.findViewById(R.id.buttonPacaton) as Button
         buttonLogOut.setOnClickListener(this)
         return rootView
+
     }
     override fun onClick(p0: View?) {
         FirebaseAuth.getInstance().signOut()

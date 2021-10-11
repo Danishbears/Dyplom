@@ -26,5 +26,7 @@
     <string name="ResetLinkSent">Reset Link Sent to Your Email</string>
     <string name="ResetLinkFailed">Reset link is not sent!</string>
     <string name="HelloToUser">Hello</string>
+    <string name="LogOut">LogOut</string>
+    <string name="NotVerifiedEmail">To verify your email click here</string>
     <string name="VerificationEmail">Verification Email has been sent</string>
 </resources>

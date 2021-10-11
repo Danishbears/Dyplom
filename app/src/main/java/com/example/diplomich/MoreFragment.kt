@@ -1,16 +1,17 @@
 package com.example.diplomich
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 
 class MoreFragment : Fragment() {
@@ -21,7 +22,7 @@ class MoreFragment : Fragment() {
     private lateinit var fAuth:FirebaseAuth
     private lateinit var fStore:FirebaseFirestore
     private lateinit var userId:String
-
+    private lateinit var emailText:TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,14 +34,22 @@ class MoreFragment : Fragment() {
         userPhone = rootView.findViewById(R.id.userPhoneNumber)
         userName = rootView.findViewById(R.id.HelloUserName)
         userPhoto = rootView.findViewById(R.id.imageUser)
-
+        emailText = rootView.findViewById(R.id.verificationEmail)
 
         fAuth = FirebaseAuth.getInstance()
         fStore = FirebaseFirestore.getInstance()
         userId = fAuth.currentUser!!.uid
 
+        val user: FirebaseUser = fAuth.currentUser!!
+        if(!user.isEmailVerified) {
+            emailSent(user)
+        }
         val documentReference:DocumentReference = fStore.collection("users").document(userId)
         documentReference.addSnapshotListener{snapshot, e->
+            if (e != null) {
+                Log.d("TAG", "Failed to read data from Firestore ${e.message}")
+                return@addSnapshotListener
+            }
             userPhone.text = snapshot!!.getString("PhoneNumber")
             userName.text = "${resources.getString(R.string.HelloToUser)} ${snapshot!!.getString("Name")}"
             userEmail.text = snapshot!!.getString("Email")
@@ -49,5 +58,17 @@ class MoreFragment : Fragment() {
         return rootView
     }
 
+    private fun emailSent(user: FirebaseUser) {
+            emailText.text = R.string.NotVerifiedEmail.toString()
+            emailText.visibility = View.VISIBLE
+            emailText.setOnClickListener {
+                user.sendEmailVerification().addOnSuccessListener {
+                    Toast.makeText(requireActivity().applicationContext,R.string.VerificationEmail,Toast.LENGTH_SHORT).show()
+                }
+                    .addOnFailureListener{
+                        Log.d("TAG","On Failure ${it.message}")
+                    }
+            }
+    }
 
 }
