@@ -4,18 +4,21 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import com.example.diplomich.AdminActivity
 import com.example.diplomich.MainActivity
 import com.example.diplomich.R
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
+
     private lateinit var loginMail:EditText
     private lateinit var loginPassword:EditText
     private lateinit var loginButton:Button
@@ -24,8 +27,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var progressBar:ProgressBar
     private lateinit var forgetPassword:TextView
     private lateinit var fStore: FirebaseFirestore
-    private lateinit var userId:String
-    private lateinit var adminTextVie: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,9 +39,8 @@ class LoginActivity : AppCompatActivity() {
         loginToRegText = findViewById(R.id.RegisterText)
         progressBar = findViewById(R.id.progressBarLogin)
         forgetPassword = findViewById(R.id.textForgetPassword)
-        adminTextVie = findViewById(R.id.adminTextView)
         fStore = FirebaseFirestore.getInstance()
-        // userId = fAuth.currentUser!!.uid
+        //userId = fAuth.currentUser!!.uid
 
 
         loginButton.setOnClickListener{
@@ -55,14 +55,6 @@ class LoginActivity : AppCompatActivity() {
             resetPass(it)
         }
 
-        adminTextVie.setOnClickListener{
-            performAdminLogin()
-        }
-
-
-    }
-
-    private fun performAdminLogin() {
 
     }
 
@@ -85,20 +77,46 @@ class LoginActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
 
         //check user in database
-        fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this){
-            task->onCompleteLogin(task)
+      /*  fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this){task->onCompleteLogin(task)
+            //checkUserLevel(it.user!!.uid)
+
+        }.addOnFailureListener{
+            Toast.makeText(this,"Smert'",Toast.LENGTH_SHORT).show()
+        }*/
+        fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener{
+           task ->
+            task.user?.let { checkUserLevel(it.uid) }
         }
     }
 
+
     private fun onCompleteLogin(task: Task<AuthResult>) {
-        if(task.isSuccessful){
-            Toast.makeText(this,"Login successfully", Toast.LENGTH_SHORT).show()
+        if (task.isSuccessful) {
+            // checkUserLevel(fAuth.uid)
+            Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show()
             startActivity(Intent(applicationContext, MainActivity::class.java))
 
         }else{
-            Toast.makeText(this," ERROR! " + task.exception!!.message, Toast.LENGTH_SHORT).show()
+
         }
     }
+
+
+    private fun checkUserLevel(task: String) {
+        var df:DocumentReference = fStore.collection("users").document(task)
+        df.get().addOnSuccessListener(){ documentSnapshot ->
+            if(documentSnapshot.getString("isAdmin")!=null){
+                Toast.makeText(this,"Login successfully", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(applicationContext,AdminActivity::class.java))
+                finish()
+            }
+            if(documentSnapshot.getString("isUser")!=null){
+                startActivity(Intent(applicationContext,MainActivity::class.java))
+                finish()
+            }
+        }
+    }
+
 
     private fun resetPass(view: View) {
 
