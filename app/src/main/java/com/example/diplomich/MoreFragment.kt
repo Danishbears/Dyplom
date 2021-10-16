@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 
-class MoreFragment : Fragment() {
+class MoreFragment : Fragment(){
     private lateinit var userEmail: TextView
     private lateinit var userPhone: TextView
     private lateinit var userName:TextView
@@ -54,12 +54,11 @@ class MoreFragment : Fragment() {
             userName.text = "${resources.getString(R.string.HelloToUser)} ${snapshot!!.getString("Name")}"
             userEmail.text = snapshot!!.getString("Email")
         }
-
         return rootView
     }
 
     private fun emailSent(user: FirebaseUser) {
-            emailText.text = R.string.NotVerifiedEmail.toString()
+            emailText.text = resources.getString(R.string.NotVerifiedEmail)
             emailText.visibility = View.VISIBLE
             emailText.setOnClickListener {
                 user.sendEmailVerification().addOnSuccessListener {

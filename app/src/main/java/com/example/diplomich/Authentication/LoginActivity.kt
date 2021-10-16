@@ -12,6 +12,8 @@ import com.example.diplomich.R
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var loginMail:EditText
@@ -21,6 +23,10 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginToRegText:TextView
     private lateinit var progressBar:ProgressBar
     private lateinit var forgetPassword:TextView
+    private lateinit var fStore: FirebaseFirestore
+    private lateinit var userId:String
+    private lateinit var adminTextVie: TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +38,10 @@ class LoginActivity : AppCompatActivity() {
         loginToRegText = findViewById(R.id.RegisterText)
         progressBar = findViewById(R.id.progressBarLogin)
         forgetPassword = findViewById(R.id.textForgetPassword)
+        adminTextVie = findViewById(R.id.adminTextView)
+        fStore = FirebaseFirestore.getInstance()
+        // userId = fAuth.currentUser!!.uid
+
 
         loginButton.setOnClickListener{
             performLogin()
@@ -45,7 +55,17 @@ class LoginActivity : AppCompatActivity() {
             resetPass(it)
         }
 
+        adminTextVie.setOnClickListener{
+            performAdminLogin()
+        }
+
+
     }
+
+    private fun performAdminLogin() {
+
+    }
+
     private fun performLogin(){
         var email:String = loginMail.text.toString().trim()
         var password:String = loginPassword.text.toString().trim()
@@ -81,6 +101,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun resetPass(view: View) {
+
         val passwordEditText = EditText(this)
         val builder = AlertDialog.Builder(view.context)
         builder.setTitle(R.string.ResetDialog)
