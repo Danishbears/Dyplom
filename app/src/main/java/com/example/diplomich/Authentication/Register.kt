@@ -128,7 +128,7 @@ class Register : AppCompatActivity() {
            "Surname" to Surname,
            "Email" to email,
            "PhoneNumber" to phoneNumber,
-            "isUser" to true
+            "isUser" to "1"
         )
     }
 
