@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Diplomich">
         <activity
+            android:name=".AdminAddProductActivity"
+            android:exported="true" />
+        <activity
             android:name=".AdminActivity"
             android:exported="true" />
         <activity
