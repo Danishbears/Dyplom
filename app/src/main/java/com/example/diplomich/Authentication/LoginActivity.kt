@@ -87,6 +87,9 @@ class LoginActivity : AppCompatActivity() {
            task ->
             task.user?.let { checkUserLevel(it.uid) }
         }
+            .addOnFailureListener{
+                Toast.makeText(this,"Not valid information",Toast.LENGTH_SHORT).show()
+            }
     }
 
 

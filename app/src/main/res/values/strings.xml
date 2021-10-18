@@ -31,4 +31,8 @@
     <string name="VerificationEmail">Verification Email has been sent</string>
     <string name="AdminMessage">Add new item</string>
     <string name="NonAdminTextView">Am i a user?</string>
+    <string name="product_name">Product name...</string>
+    <string name="add_product_description">Add product description</string>
+    <string name="add_price">Add price</string>
+    <string name="accept">Accept</string>
 </resources>
