@@ -1,17 +1,29 @@
 package com.example.diplomich
 
+import android.content.Intent
+import android.media.Image
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 
 class AdminAddProductActivity : AppCompatActivity() {
+
     private lateinit var categoryName:String
+    private lateinit var imageView: ImageView
     private lateinit var addNewProductButt: Button
     private lateinit var inputProdName:EditText
     private lateinit var inputProdDescription:EditText
     private lateinit var inputProdPrice:EditText
+    private lateinit var imageUri:Uri
+    private lateinit var name:String
+    private lateinit var description:String
+    private lateinit var price:String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,5 +31,58 @@ class AdminAddProductActivity : AppCompatActivity() {
         categoryName = intent.extras!!.get("category").toString()
         Toast.makeText(this,categoryName,Toast.LENGTH_SHORT).show()
 
+        imageView = findViewById(R.id.select_product)
+        addNewProductButt = findViewById(R.id.addButton)
+        inputProdName = findViewById(R.id.product_name)
+        inputProdDescription = findViewById(R.id.product_description)
+        inputProdPrice = findViewById(R.id.product_price)
+
+        imageView.setOnClickListener {
+            openGallery()
+        }
+        addNewProductButt.setOnClickListener{
+            validateProduct()
+        }
+
+    }
+
+    private fun validateProduct() {
+        description = inputProdDescription.text.toString()
+        name = inputProdName.text.toString()
+        price = inputProdPrice.text.toString()
+
+        if(imageUri == null){
+            Toast.makeText(this,R.string.imageRequired,Toast.LENGTH_SHORT).show()
+        }else if (TextUtils.isEmpty(description)){
+            Toast.makeText(this,R.string.descriptionRequired,Toast.LENGTH_LONG).show()
+        }else if(TextUtils.isEmpty(price)){
+            Toast.makeText(this,R.string.priceRequired,Toast.LENGTH_SHORT).show()
+        }
+        else{
+            storeProductInfo()
+        }
+    }
+
+    private fun storeProductInfo() {
+
+    }
+
+    private fun openGallery(){
+        val galleryIntent = Intent()
+        galleryIntent.action = Intent.ACTION_GET_CONTENT
+        galleryIntent.type = "image/"
+        startActivityForResult(galleryIntent, GalleryPick)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == GalleryPick && resultCode == RESULT_OK  && data!= null){
+            imageUri = data.data!!
+            imageView.setImageURI(imageUri)
+        }
+    }
+
+    companion object{
+        private const val GalleryPick = 1
     }
 }

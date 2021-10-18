@@ -35,4 +35,7 @@
     <string name="add_product_description">Add product description</string>
     <string name="add_price">Add price</string>
     <string name="accept">Accept</string>
+    <string name="imageRequired">Image is required</string>
+    <string name="descriptionRequired">Description is required</string>
+    <string name="priceRequired">Price is required</string>
 </resources>
