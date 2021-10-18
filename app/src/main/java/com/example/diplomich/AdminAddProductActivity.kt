@@ -10,6 +10,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AdminAddProductActivity : AppCompatActivity() {
 
@@ -23,6 +25,8 @@ class AdminAddProductActivity : AppCompatActivity() {
     private lateinit var name:String
     private lateinit var description:String
     private lateinit var price:String
+    private lateinit var saveCurrentDate:String
+    private lateinit var saveCurrentTime:String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +59,7 @@ class AdminAddProductActivity : AppCompatActivity() {
             Toast.makeText(this,R.string.imageRequired,Toast.LENGTH_SHORT).show()
         }else if (TextUtils.isEmpty(description)){
             Toast.makeText(this,R.string.descriptionRequired,Toast.LENGTH_LONG).show()
-        }else if(TextUtils.isEmpty(price)){
+        }else if(TextUtils.isEmpty(price) && price.toInt()<=0){
             Toast.makeText(this,R.string.priceRequired,Toast.LENGTH_SHORT).show()
         }
         else{
@@ -64,6 +68,15 @@ class AdminAddProductActivity : AppCompatActivity() {
     }
 
     private fun storeProductInfo() {
+
+        val calendar:Calendar = Calendar.getInstance()
+        val currentDate:SimpleDateFormat = SimpleDateFormat("MMM dd, yyyy")
+        saveCurrentDate = currentDate.format(calendar.time)
+
+        val currentTime:SimpleDateFormat = SimpleDateFormat("HH:mm:ss")
+        saveCurrentTime = currentTime.format(calendar.time)
+
+
 
     }
 
