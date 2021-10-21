@@ -31,7 +31,7 @@
     <string name="VerificationEmail">Verification Email has been sent</string>
     <string name="AdminMessage">Add new item</string>
     <string name="NonAdminTextView">Am i a user?</string>
-    <string name="product_name">Product name...</string>
+    <string name="product_name">Product name…</string>
     <string name="add_product_description">Add product description</string>
     <string name="add_price">Add price</string>
     <string name="accept">Accept</string>
@@ -41,5 +41,9 @@
     <string name="uploadedImage">Product Image uploaded successful</string>
     <string name="MessageToAdmin">Product image save to Database successfully</string>
     <string name="LoadingTitle">Add New Product</string>
-    <string name="loadingMessage">Please wait...</string>
+    <string name="loadingMessage">Please wait…</string>
+    <string name="searchItem">Find your device</string>
+    <string name="popular_products">Popular products</string>
+    <string name="view_all">View all</string>
+    <string name="explore_products">Explore Products</string>
 </resources>
