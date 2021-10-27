@@ -138,24 +138,6 @@ class AdminAddProductActivity : AppCompatActivity() {
             "price" to price,
             "name" to name)
 
-        /*productReference.child(productRandKey).updateChildren(user).addOnSuccessListener{
-            Log.d("AGTER", productReference.database.toString())
-                if(it.isSuccessful){
-                    loadingBar.dismiss()
-                    startActivity(Intent(this,AdminActivity::class.java))
-                    Toast.makeText(this,"Product added successfully",Toast.LENGTH_SHORT).show()
-
-                }else{
-                    loadingBar.dismiss()
-                    var message = it.exception.toString()
-                    Toast.makeText(this,"Error $message",Toast.LENGTH_LONG).show()
-                }
-            startActivity(Intent(applicationContext,AdminActivity::class.java))
-            Toast.makeText(this,"Product added successfully",Toast.LENGTH_SHORT).show()
-
-            }.addOnFailureListener{
-                Log.d("TAG","Error ${it.message}")
-            }*/
 
         var documentReference: DocumentReference = fStore.collection("products").document(productRandKey)
         documentReference.set(user).addOnSuccessListener {

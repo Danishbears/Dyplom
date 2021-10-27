@@ -75,7 +75,7 @@ class Register : AppCompatActivity() {
             return
         }
 //to check a special characters !!
-        progressBar.visibility = View.VISIBLE
+
 
         fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this) {task->
                 onComplete(task,Name,Surname,phoneNumber,email)
@@ -95,7 +95,7 @@ class Register : AppCompatActivity() {
 
             //send verification link
             verificationEmail()
-
+            progressBar.visibility = View.VISIBLE
             Toast.makeText(this,"User Created",Toast.LENGTH_SHORT).show()
             userId = fAuth.currentUser!!.uid
             var documentReference:DocumentReference = fStore.collection("users").document(userId)

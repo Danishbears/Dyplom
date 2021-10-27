@@ -5,19 +5,27 @@
       <map>
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/drawable/custom_button.xml" value="0.2703125" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/drawable/search_style.xml" value="0.2703125" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout-land/activity_login.xml" value="0.21516754850088182" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout-land/activity_register.xml" value="0.21516754850088182" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_admin.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_admin_add_product.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_akula.xml" value="0.12708333333333333" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_register.xml" value="0.21693840579710144" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/fragment_cart.xml" value="0.13652482269503546" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/fragment_home.xml" value="0.1793478260869565" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/fragment_favorites.xml" value="0.12864583333333332" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/fragment_more.xml" value="0.1947463768115942" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/home_products.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/popular_item.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/menu/nav_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>
     </option>
+  </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/diplomich/Akula.kt" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

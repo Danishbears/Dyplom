@@ -74,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 //to check a special characters !!
-        progressBar.visibility = View.VISIBLE
+
 
         //check user in database
       /*  fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this){task->onCompleteLogin(task)
@@ -85,23 +85,13 @@ class LoginActivity : AppCompatActivity() {
         }*/
         fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener{
            task ->
-            task.user?.let { checkUserLevel(it.uid) }
+            task.user?.let {
+                progressBar.visibility = View.VISIBLE
+                checkUserLevel(it.uid) }
         }
             .addOnFailureListener{
                 Toast.makeText(this,"Not valid information",Toast.LENGTH_SHORT).show()
             }
-    }
-
-
-    private fun onCompleteLogin(task: Task<AuthResult>) {
-        if (task.isSuccessful) {
-            // checkUserLevel(fAuth.uid)
-            Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(applicationContext, MainActivity::class.java))
-
-        }else{
-
-        }
     }
 
 

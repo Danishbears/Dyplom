@@ -1,14 +1,17 @@
 package com.example.diplomich
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.example.diplomich.Authentication.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
@@ -23,6 +26,7 @@ class MoreFragment : Fragment(){
     private lateinit var fStore:FirebaseFirestore
     private lateinit var userId:String
     private lateinit var emailText:TextView
+    private lateinit var buttonLogout: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +43,12 @@ class MoreFragment : Fragment(){
         fAuth = FirebaseAuth.getInstance()
         fStore = FirebaseFirestore.getInstance()
         userId = fAuth.currentUser!!.uid
+
+        buttonLogout = rootView.findViewById(R.id.logoutButton)
+        buttonLogout.setOnClickListener{
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(requireActivity().applicationContext,LoginActivity::class.java))
+        }
 
         val user: FirebaseUser = fAuth.currentUser!!
         if(!user.isEmailVerified) {
