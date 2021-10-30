@@ -47,10 +47,11 @@ class MyAdapter(var context:Context,
         holder.description.text = products.description
         holder.imageView.setOnClickListener {
             val intent = Intent(holder.itemView.context,ProductDetailsActivity::class.java)
-            //  intent.putExtra("pid",products.pid)
+            intent.putExtra("pid",products.pid)
             Log.d("Uniete",context.packageResourcePath)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK;
             holder.itemView.context.startActivity(intent)
+
         }
     }
 
