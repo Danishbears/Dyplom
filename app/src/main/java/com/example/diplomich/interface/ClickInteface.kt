@@ -4,5 +4,7 @@ import android.view.View
 import java.text.FieldPosition
 
 interface ClickInteface {
-    fun onClick(v: View,position: Int,isLongClick:Boolean)
+    fun onClick(position: Int)
+    fun onWhatEverClick(position: Int)
+    fun onDeleteClick(position:Int)
 }

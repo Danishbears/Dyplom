@@ -63,7 +63,7 @@
             android:text="@string/add_cart"/>
 
         <Button
-            android:id="@+id/but_now_details"
+            android:id="@+id/buy_now_details"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

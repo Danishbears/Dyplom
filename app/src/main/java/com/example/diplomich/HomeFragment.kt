@@ -6,19 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.diplomich.ViewModel.ProductViewHolder
 import com.example.diplomich.ViewModel.Products
-import com.firebase.ui.database.FirebaseRecyclerAdapter
-import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.google.firebase.database.*
-import com.squareup.picasso.Picasso
-import androidx.core.view.GravityCompat
 
-import androidx.drawerlayout.widget.DrawerLayout
-import com.bumptech.glide.Glide
 import com.example.diplomich.adapter.MyAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
@@ -46,8 +37,8 @@ class HomeFragment : Fragment() {
         mRecyclerView.setHasFixedSize(true)
         imageStorage = FirebaseStorage.getInstance().reference
         mRecyclerView.layoutManager = LinearLayoutManager(rootView.context)
-
         val docRef = mDatabaseRef1.collection("products")
+
         docRef.get().addOnSuccessListener { documentSnapshot ->
             val city = documentSnapshot.toObjects<Products>()
             for(eachIndex in city.indices){
@@ -59,6 +50,7 @@ class HomeFragment : Fragment() {
             mRecyclerView.adapter = mAdapter
             Log.d("VIBECHEdada", city[0].toString())
         }
+
 
         return rootView
 

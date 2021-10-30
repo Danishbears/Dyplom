@@ -16,9 +16,6 @@
             android:name=".ProductDetailsActivity"
             android:exported="true" />
         <activity
-            android:name=".Akula"
-            android:exported="true" />
-        <activity
             android:name=".AdminAddProductActivity"
             android:exported="true" />
         <activity
@@ -30,6 +27,7 @@
         <activity
             android:name=".Authentication.Register"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
