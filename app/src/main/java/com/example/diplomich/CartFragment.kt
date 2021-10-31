@@ -1,7 +1,6 @@
 package com.example.diplomich
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +9,8 @@ import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diplomich.ViewModel.Cart
-import com.example.diplomich.ViewModel.Products
 import com.example.diplomich.adapter.CartAdapter
-import com.example.diplomich.adapter.MyAdapter
-import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
 
@@ -55,7 +49,7 @@ private lateinit var userId:String
                     mUploads.add(city[eachIndex])
                 }
             }
-            mAdapter = CartAdapter(requireActivity().applicationContext,mUploads)
+            mAdapter = CartAdapter(requireActivity().applicationContext,mUploads,activity)
             recyclerCart.adapter = mAdapter
         }
 

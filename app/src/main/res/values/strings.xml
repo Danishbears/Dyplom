@@ -49,4 +49,6 @@
     <string name="add_cart">Add to cart</string>
     <string name="buy_now">Buy now</string>
     <string name="your_order">Your order</string>
+    <string name="RemoveFromCart">Remove form Cart</string>
+    <string name="Change">Change</string>
 </resources>
