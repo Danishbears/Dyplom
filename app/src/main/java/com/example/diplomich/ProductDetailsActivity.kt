@@ -98,7 +98,7 @@ class ProductDetailsActivity : AppCompatActivity() {
             productDescription.text = snapshot.getString("description")
             productPrice.text = snapshot!!.getString("price")
             Glide.with(this)
-                .load(snapshot.getString("image")!!.toUri())
+                .load("https://firebasestorage.googleapis.com/v0/b/dyplom-867af.appspot.com/o/Product%20Images%2Fimage%3A24Oct%2029%2C%20202114%3A11%3A02.jpg?alt=media&token=ed745a9f-2a68-47fe-a217-27efb6328609")
                 .into(productImage)
         }
     }

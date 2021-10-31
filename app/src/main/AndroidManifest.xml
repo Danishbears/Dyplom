@@ -13,6 +13,10 @@
         android:theme="@style/Theme.Diplomich"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ConfirmOrderActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="true" />
+        <activity
             android:name=".ProductDetailsActivity"
             android:exported="true" />
         <activity
@@ -27,7 +31,6 @@
         <activity
             android:name=".Authentication.Register"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

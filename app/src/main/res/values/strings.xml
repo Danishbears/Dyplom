@@ -51,4 +51,6 @@
     <string name="your_order">Your order</string>
     <string name="RemoveFromCart">Remove form Cart</string>
     <string name="Change">Change</string>
+    <string name="Continue">Continue</string>
+    <string name="contact_details">Contact details</string>
 </resources>

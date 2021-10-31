@@ -1,6 +1,8 @@
 package com.example.diplomich
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +24,7 @@ private lateinit var mUploads:MutableList<Cart>
 private lateinit var mAdapter: CartAdapter
 private lateinit var fAuth: FirebaseAuth
 private lateinit var userId:String
-
+private lateinit var totalPrice:String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,10 +40,15 @@ private lateinit var userId:String
         recyclerCart.setHasFixedSize(true)
         recyclerCart.layoutManager = LinearLayoutManager(root.context)
 
+        priceButton.setOnClickListener {
+            val intent = Intent(root.context,ConfirmOrderActivity::class.java)
+            intent.putExtra("Total price",priceButton.text.toString())
+            startActivity(intent)
+        }
+
         val docRef = mDatabaseRef1.collection("CartList").document(userId)
             .collection("ProductId")
-
-
+        var totalCount:Int =0
         docRef.get().addOnSuccessListener { documentSnapshot ->
             val city = documentSnapshot.toObjects<Cart>()
             for(eachIndex in city.indices){
@@ -49,6 +56,13 @@ private lateinit var userId:String
                     mUploads.add(city[eachIndex])
                 }
             }
+            for(eachPrice in city.indices){
+                totalCount += city[eachPrice].price?.toInt()!!
+
+            }
+            totalPrice = totalCount.toString()
+            priceButton.text = totalPrice
+
             mAdapter = CartAdapter(requireActivity().applicationContext,mUploads,activity)
             recyclerCart.adapter = mAdapter
         }

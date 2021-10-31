@@ -5,12 +5,14 @@
       <map>
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/drawable/custom_button.xml" value="0.2703125" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/drawable/divider.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/drawable/edittextround.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/drawable/search_style.xml" value="0.2703125" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout-land/activity_login.xml" value="0.21516754850088182" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout-land/activity_register.xml" value="0.21516754850088182" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_admin.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_admin_add_product.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_akula.xml" value="0.12708333333333333" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_confirm_order.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_product_details.xml" value="0.1" />
