@@ -1,19 +1,17 @@
-package com.example.diplomich
+package com.example.diplomich.Admin
 
 import android.app.ProgressDialog
 import android.content.Intent
-import android.media.Image
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.widget.*
+import com.example.diplomich.R
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -71,11 +69,11 @@ class AdminAddProductActivity : AppCompatActivity() {
         price = inputProdPrice.text.toString()
 
         if(imageUri == null){
-            Toast.makeText(this,R.string.imageRequired,Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.imageRequired,Toast.LENGTH_SHORT).show()
         }else if (TextUtils.isEmpty(description)){
-            Toast.makeText(this,R.string.descriptionRequired,Toast.LENGTH_LONG).show()
+            Toast.makeText(this, R.string.descriptionRequired,Toast.LENGTH_LONG).show()
         }else if(TextUtils.isEmpty(price)){
-            Toast.makeText(this,R.string.priceRequired,Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.priceRequired,Toast.LENGTH_SHORT).show()
         }
         else{
             storeProductInfo()
@@ -85,7 +83,7 @@ class AdminAddProductActivity : AppCompatActivity() {
     private fun storeProductInfo() {
 
         loadingBar.setTitle(R.string.LoadingTitle)
-        loadingBar.setMessage(R.string.loadingMessage.toString())
+        loadingBar.setMessage(resources.getString(R.string.loadingMessage))
         loadingBar.setCanceledOnTouchOutside(false)
         loadingBar.show()
 
@@ -107,7 +105,7 @@ class AdminAddProductActivity : AppCompatActivity() {
             loadingBar.dismiss()
         }
             .addOnSuccessListener {
-                Toast.makeText(this,R.string.uploadedImage,Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.uploadedImage,Toast.LENGTH_SHORT).show()
                 var uriTask: Task<Uri> = uploadTask.continueWithTask(Continuation {
 
                     if(!it.isSuccessful){
@@ -120,7 +118,7 @@ class AdminAddProductActivity : AppCompatActivity() {
             }.addOnCompleteListener(OnCompleteListener {
                 if(it.isSuccessful){
                     downloadImageUri = it.result.toString()
-                    Toast.makeText(this,R.string.AdminMessage,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, R.string.AdminMessage,Toast.LENGTH_SHORT).show()
                     saveProductInfoToDatabase()
                 }
             })
@@ -144,7 +142,7 @@ class AdminAddProductActivity : AppCompatActivity() {
             loadingBar.dismiss()
             Log.d("TAG", "onSuccess: product has been added is$productRandKey")
             Toast.makeText(this,"Product added successfully",Toast.LENGTH_SHORT).show()
-            startActivity(Intent(applicationContext,AdminActivity::class.java))
+            startActivity(Intent(applicationContext, AdminActivity::class.java))
         }
             .addOnFailureListener{
                 loadingBar.dismiss()

@@ -1,12 +1,11 @@
-package com.example.diplomich
+package com.example.diplomich.Admin
 
 import android.content.Intent
-import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.ImageView
+import com.example.diplomich.Admin.AdminAddProductActivity
 import com.example.diplomich.Authentication.LoginActivity
 import com.example.diplomich.R
 import com.google.firebase.auth.FirebaseAuth
@@ -33,17 +32,17 @@ class AdminActivity : AppCompatActivity() {
         mouseView = findViewById(R.id.mouse)
         keyboardView = findViewById(R.id.keyboard)
         phoneView.setOnClickListener {
-            val intent:Intent = Intent(this,AdminAddProductActivity::class.java)
+            val intent:Intent = Intent(this, AdminAddProductActivity::class.java)
             intent.putExtra("category","phone")
             startActivity(intent)
         }
         mouseView.setOnClickListener {
-            val intent:Intent = Intent(this,AdminAddProductActivity::class.java)
+            val intent:Intent = Intent(this, AdminAddProductActivity::class.java)
             intent.putExtra("category","mouse")
             startActivity(intent)
         }
         keyboardView.setOnClickListener {
-            val intent:Intent = Intent(this,AdminAddProductActivity::class.java)
+            val intent:Intent = Intent(this, AdminAddProductActivity::class.java)
             intent.putExtra("category","keyboard")
             startActivity(intent)
         }

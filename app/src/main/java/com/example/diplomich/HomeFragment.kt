@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
             }
             mAdapter = MyAdapter(requireActivity().applicationContext,mUploads)
             mRecyclerView.adapter = mAdapter
-            Log.d("VIBECHEdada", city[0].toString())
+            //Log.d("VIBECHEdada", city[0].toString())
         }
 
 

@@ -16,10 +16,10 @@
             android:name=".ProductDetailsActivity"
             android:exported="true" />
         <activity
-            android:name=".AdminAddProductActivity"
+            android:name=".Admin.AdminAddProductActivity"
             android:exported="true" />
         <activity
-            android:name=".AdminActivity"
+            android:name=".Admin.AdminActivity"
             android:exported="true" />
         <activity
             android:name=".Authentication.LoginActivity"

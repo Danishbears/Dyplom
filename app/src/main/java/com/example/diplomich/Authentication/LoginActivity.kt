@@ -4,15 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import com.example.diplomich.AdminActivity
+import com.example.diplomich.Admin.AdminActivity
 import com.example.diplomich.MainActivity
 import com.example.diplomich.R
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -100,7 +97,7 @@ class LoginActivity : AppCompatActivity() {
         df.get().addOnSuccessListener(){ documentSnapshot ->
             if(documentSnapshot.getString("isAdmin")!=null){
                 Toast.makeText(this,"Login successfully", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(applicationContext,AdminActivity::class.java))
+                startActivity(Intent(applicationContext, AdminActivity::class.java))
                 finish()
             }
             if(documentSnapshot.getString("isUser")!=null){

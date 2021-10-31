@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminAddProductActivity">
+    tools:context=".Admin.AdminAddProductActivity">
 
     <ImageView
         android:id="@+id/select_product"
@@ -48,7 +48,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginRight="45dp"
         android:hint="@string/add_price"
-        android:inputType="textMultiLine"
+        android:inputType="number"
         android:padding="20dp" />
 
     <android.widget.Button

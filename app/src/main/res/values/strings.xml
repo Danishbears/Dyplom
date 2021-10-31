@@ -48,4 +48,5 @@
     <string name="explore_products">Explore Products</string>
     <string name="add_cart">Add to cart</string>
     <string name="buy_now">Buy now</string>
+    <string name="your_order">Your order</string>
 </resources>
