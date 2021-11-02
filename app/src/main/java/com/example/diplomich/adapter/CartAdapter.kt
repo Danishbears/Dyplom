@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
 import com.example.diplomich.CartFragment
 import com.example.diplomich.R
 import com.example.diplomich.ViewModel.Cart
@@ -39,7 +40,7 @@ class CartAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val productsCart: Cart = list[position]
-
+        //holder.elegantbutton.number = productsCart.count!!.toInt().toString()
         holder.productName.text = productsCart.name
         holder.productPrice.text = productsCart.price
         holder.description.text = productsCart.description
@@ -82,6 +83,7 @@ class CartAdapter(
         val productPrice = itemView.findViewById(R.id.price_cart) as TextView
         val description = itemView.findViewById(R.id.description_cart) as TextView
         val imageView = itemView.findViewById(R.id.image_cart) as ImageView
+        val elegantbutton = itemView.findViewById(R.id.number_count_cart) as ElegantNumberButton
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
         val fAuth: FirebaseAuth = FirebaseAuth.getInstance()
         var userId:String = fAuth.currentUser!!.uid

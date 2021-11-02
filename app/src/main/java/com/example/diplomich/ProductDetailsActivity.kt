@@ -72,8 +72,8 @@ class ProductDetailsActivity : AppCompatActivity() {
             "description" to productDescription.text.toString(),
             "price" to productPrice.text.toString(),
             "discount" to "",
-            "name" to productName.text.toString())
-            "image" to productImage
+            "name" to productName.text.toString(),
+            "count" to "1")
 
         var documentReference: DocumentReference = fStore.collection("CartList").document(userId)
             .collection("ProductId").document(productId)

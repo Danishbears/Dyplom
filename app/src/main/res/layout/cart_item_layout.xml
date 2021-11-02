@@ -16,8 +16,8 @@
             android:id="@+id/image_cart"
             android:layout_width="100dp"
             android:layout_height="120dp"
-            android:scaleType="centerCrop"
-            android:layout_marginStart="5dp" />
+            android:layout_marginStart="5dp"
+            android:scaleType="centerCrop" />
         <TextView
             android:id="@+id/name_cart"
             android:layout_width="140sp"
@@ -50,6 +50,19 @@
             android:textColor="@android:color/darker_gray"
             android:textSize="16sp"
             android:textStyle="bold" />
+
+        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+            android:id="@+id/number_count_cart"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/price_cart"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/description_cart"
+            app:finalNumber="8"
+            app:initialNumber="1"
+            app:textSize="10sp">
+
+        </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

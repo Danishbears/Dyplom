@@ -17,8 +17,9 @@ class AdminActivity : AppCompatActivity() {
     private lateinit var monitor:ImageView
     private lateinit var videoCard:ImageView
     private lateinit var gamepad:ImageView
-
     private lateinit var buttonLog: Button
+    private lateinit var buttonCheck:Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin)
@@ -31,6 +32,12 @@ class AdminActivity : AppCompatActivity() {
         phoneView = findViewById(R.id.phone)
         mouseView = findViewById(R.id.mouse)
         keyboardView = findViewById(R.id.keyboard)
+        buttonCheck = findViewById(R.id.checkNewItems)
+
+        buttonCheck.setOnClickListener {
+            startActivity(Intent(applicationContext,AdminNewOrderActivity::class.java))
+        }
+
         phoneView.setOnClickListener {
             val intent:Intent = Intent(this, AdminAddProductActivity::class.java)
             intent.putExtra("category","phone")
