@@ -3,14 +3,11 @@ package com.example.diplomich.Admin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diplomich.R
-import com.example.diplomich.ViewModel.Products
 import com.example.diplomich.ViewModel.UserOrders
-import com.example.diplomich.adapter.MyAdapter
 import com.example.diplomich.adapter.OrdersAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
@@ -40,7 +37,7 @@ class AdminNewOrderActivity : AppCompatActivity() {
                     mUploads.add(city[eachIndex])
                 }
             }
-            mAdapter = OrdersAdapter(applicationContext,mUploads)
+            mAdapter = OrdersAdapter(applicationContext,mUploads,this)
             recyclerCart.adapter = mAdapter
             Log.d("VIBECHEdada", city[0].toString())
         }

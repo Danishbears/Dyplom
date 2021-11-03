@@ -1,6 +1,7 @@
 package com.example.diplomich.ViewModel
 
 class UserOrders {
+    var id:String?=null
     var totalPrice:String?=null
     var address:String?=null
     var date:String?=null
@@ -11,6 +12,7 @@ class UserOrders {
 
     constructor() {}
     constructor(
+        id:String?,
         totalPrice: String?,
         address: String?,
         date: String?,
@@ -18,6 +20,7 @@ class UserOrders {
         phone: String?,
         time: String?
     ) {
+        this.id=id
         this.totalPrice = totalPrice
         this.address = address
         this.date = date

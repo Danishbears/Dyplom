@@ -91,6 +91,7 @@ class ConfirmOrderActivity : AppCompatActivity() {
         saveCurrentTime = currentTime.format(calForData.time)
 
         val orderMap: HashMap<String, Any> = hashMapOf(
+            "id" to userId,
             "TotalPrice" to totalPrice.toString(),
             "date" to saveCurrentDate,
             "time" to saveCurrentTime,
