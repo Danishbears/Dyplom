@@ -15,9 +15,12 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:theme">
         <activity
+            android:name=".Admin.AdminViewUserProducts"
+            android:exported="true" />
+        <activity
             android:name=".Admin.AdminNewOrderActivity"
             android:exported="true"
-            android:parentActivityName=".Admin.AdminActivity"/>
+            android:parentActivityName=".Admin.AdminActivity" />
         <activity
             android:name=".ConfirmOrderActivity"
             android:exported="true"

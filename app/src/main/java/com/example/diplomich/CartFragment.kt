@@ -25,6 +25,7 @@ private lateinit var mAdapter: CartAdapter
 private lateinit var fAuth: FirebaseAuth
 private lateinit var userId:String
 private lateinit var totalPrice:String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,6 +49,7 @@ private lateinit var totalPrice:String
 
         val docRef = mDatabaseRef1.collection("CartList").document(userId)
             .collection("ProductId")
+
         var totalCount:Int =0
         docRef.get().addOnSuccessListener { documentSnapshot ->
             val city = documentSnapshot.toObjects<Cart>()

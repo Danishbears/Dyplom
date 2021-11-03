@@ -27,12 +27,13 @@ class ConfirmOrderActivity : AppCompatActivity() {
     private lateinit var fStore: FirebaseFirestore
     private lateinit var userId:String
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_order)
 
         totalPrice = intent.getStringExtra("Total price").toString()
-        Toast.makeText(this,"Total Price=${totalPrice.toString()}$",Toast.LENGTH_SHORT).show()
+
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
@@ -74,7 +75,7 @@ class ConfirmOrderActivity : AppCompatActivity() {
             Toast.makeText(this,"Not a valid phone number ",Toast.LENGTH_SHORT).show()
         }
         else{
-            Toast.makeText(this,"CONFIRM?",Toast.LENGTH_SHORT).show()
+
             confirmOrder()
         }
     }
