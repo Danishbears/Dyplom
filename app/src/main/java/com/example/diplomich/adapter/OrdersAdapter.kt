@@ -3,14 +3,17 @@ package com.example.diplomich.adapter
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diplomich.Admin.AdminNewOrderActivity
+import com.example.diplomich.Admin.AdminViewUserProducts
 import com.example.diplomich.R
 import com.example.diplomich.ViewModel.UserOrders
 import com.google.firebase.auth.FirebaseAuth
@@ -64,6 +67,14 @@ class OrdersAdapter(
             builder.create()
             builder.show()
         }
+
+        holder.button.setOnClickListener {
+            val intent = Intent(activity,AdminViewUserProducts::class.java)
+            intent.putExtra("uid",products.id)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            holder.itemView.context.startActivity(intent)
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -75,6 +86,7 @@ class OrdersAdapter(
         val productPrice = itemView.findViewById(R.id.order_price) as TextView
         val phone = itemView.findViewById(R.id.user_phone) as TextView
         val address = itemView.findViewById(R.id.order_address) as TextView
+        val button = itemView.findViewById(R.id.check_user_prod_btn) as Button
         val fAuth: FirebaseAuth = FirebaseAuth.getInstance()
         var userId:String = fAuth.currentUser!!.uid
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
