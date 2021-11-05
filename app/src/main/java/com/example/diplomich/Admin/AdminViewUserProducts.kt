@@ -3,6 +3,7 @@ package com.example.diplomich.Admin
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +31,8 @@ class AdminViewUserProducts : AppCompatActivity() {
         mDatabaseRef1 = FirebaseFirestore.getInstance()
         mUploads = ArrayList()
 
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         recyclerCart = findViewById(R.id.admin_view_user_products)
         recyclerCart.setHasFixedSize(true)
         recyclerCart.layoutManager = LinearLayoutManager(applicationContext)
@@ -47,6 +50,9 @@ class AdminViewUserProducts : AppCompatActivity() {
             }
             mAdapter = AdminUserAdapter(applicationContext,mUploads,this)
             recyclerCart.adapter = mAdapter
+        }.addOnFailureListener{
+            Toast.makeText(this,"${it.message}",Toast.LENGTH_SHORT).show()
         }
+
     }
 }

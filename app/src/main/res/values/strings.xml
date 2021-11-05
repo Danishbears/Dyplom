@@ -57,4 +57,5 @@
     <string name="check_new_items">Check New Items</string>
     <string name="new_orders">New Orders</string>
     <string name="user_products">User Products</string>
+    <string name="catalog_fragment">Catalog</string>
 </resources>

@@ -14,9 +14,11 @@
         android:theme="@style/Theme.Diplomich"
         android:usesCleartextTraffic="true"
         tools:replace="android:theme">
+
         <activity
             android:name=".Admin.AdminViewUserProducts"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".Admin.AdminNewOrderActivity"/>
         <activity
             android:name=".Admin.AdminNewOrderActivity"
             android:exported="true"
@@ -46,6 +48,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

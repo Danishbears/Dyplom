@@ -39,7 +39,6 @@ class AdminNewOrderActivity : AppCompatActivity() {
             }
             mAdapter = OrdersAdapter(applicationContext,mUploads,this)
             recyclerCart.adapter = mAdapter
-            Log.d("VIBECHEdada", city[0].toString())
         }
             .addOnFailureListener{
                 Toast.makeText(this,"${it.message}",Toast.LENGTH_SHORT).show()
