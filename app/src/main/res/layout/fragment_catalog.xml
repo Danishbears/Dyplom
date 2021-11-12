@@ -1,14 +1,249 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CatalogFragment">
-
-
-    <TextView
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".CatalogFragment">
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/SearchItem"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.449"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/Linear1"
+        android:layout_width="205dp"
+        android:layout_height="68dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/admin">
+
+        <ImageView
+            android:id="@+id/mouse"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/mouse"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Linear1"/>
+
+        <TextView
+            android:id="@+id/mouse_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/Mouse"
+            android:textSize="16sp"
+    />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/Linear2"
+        android:layout_width="205dp"
+        android:layout_height="68dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@+id/Linear1"
+        app:layout_constraintTop_toBottomOf="@+id/admin">
+
+        <ImageView
+            android:id="@+id/keyboard"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/keyvboard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.54"
+            app:layout_constraintStart_toEndOf="@+id/divider3" />
+
+        <TextView
+            android:id="@+id/keyboard_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/Keyboard"
+            android:textSize="16sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Linear3"
+        android:layout_width="205dp"
+        android:layout_height="68dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Linear1">
+
+    <ImageView
+        android:id="@+id/gamepad"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/gamepad"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Linear1" />
+
+        <TextView
+            android:id="@+id/gamepad_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/GamePad"
+            android:textSize="16sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Linear4"
+        android:layout_width="205dp"
+        android:layout_height="68dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@+id/Linear3"
+        app:layout_constraintTop_toBottomOf="@+id/Linear2">
+
+        <ImageView
+            android:id="@+id/monitor"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/monitor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.54"
+            app:layout_constraintTop_toBottomOf="@+id/Linear4" />
+
+        <TextView
+            android:id="@+id/monitor_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/Monitors"
+            android:textSize="16sp"
+      />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Linear5"
+        android:layout_width="205dp"
+        android:layout_height="68dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Linear3">
+    <ImageView
+        android:id="@+id/phone"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Linear5" />
+
+        <TextView
+            android:id="@+id/text_phone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/Phones"
+            android:textSize="16sp"
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Linear6"
+        android:layout_width="205dp"
+        android:layout_height="68dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@+id/Linear5"
+        app:layout_constraintTop_toBottomOf="@+id/Linear4">
+
+        <ImageView
+            android:id="@+id/videocard"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/videocard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.54"
+            app:layout_constraintTop_toBottomOf="@+id/Linear6" />
+        <TextView
+            android:id="@+id/videocard_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/VideoCard"
+            android:textSize="16sp"
+            />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Linear1"/>
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="1dp"
+        android:layout_height="259dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/admin" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Linear3" />
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Linear5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

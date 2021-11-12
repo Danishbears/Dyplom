@@ -58,4 +58,11 @@
     <string name="new_orders">New Orders</string>
     <string name="user_products">User Products</string>
     <string name="catalog_fragment">Catalog</string>
+    <string name="Mouse">Mice</string>
+    <string name="Keyboard">Keyboards</string>
+    <string name="VideoCard">Video Cards</string>
+    <string name="Monitors">Monitors</string>
+    <string name="Phones">Phones</string>
+    <string name="GamePad">Game Controllers</string>
+    <string name="SearchItem">Search Iten</string>
 </resources>
