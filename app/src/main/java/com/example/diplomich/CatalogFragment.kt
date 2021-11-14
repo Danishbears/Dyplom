@@ -1,12 +1,21 @@
 package com.example.diplomich
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.diplomich.ViewModel.Products
+import com.example.diplomich.adapter.AdminUserAdapter
+import com.example.diplomich.adapter.CatalogAdapter
+import com.example.diplomich.adapter.MyAdapter
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
@@ -19,8 +28,8 @@ class CatalogFragment : Fragment() {
     private lateinit var layout4:View
     private lateinit var layout5:View
     private lateinit var layout6:View
-    private lateinit var mDatabaseRef1: FirebaseFirestore
-    private lateinit var mUploads:MutableList<Products>
+    private var mouse:String = "mouse"
+    private var keyboard:String = "keyboard"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,30 +43,23 @@ class CatalogFragment : Fragment() {
         layout4 = viewroot.findViewById(R.id.Linear4)
         layout5 = viewroot.findViewById(R.id.Linear5)
         layout6 = viewroot.findViewById(R.id.Linear6)
-        mDatabaseRef1 = FirebaseFirestore.getInstance()
-        mUploads = ArrayList()
-        val docRef = mDatabaseRef1.collection("products")
 
         layout1.setOnClickListener {
-            getFirestoreCollection(docRef,"mouse")
+            val intent = Intent(requireActivity().applicationContext,FragmentCategory::class.java)
+            intent.putExtra("mouse",mouse)
+            requireContext().startActivity(intent)
+          //  getFirestoreCollection(docRef,"mouse")
         }
 
         layout2.setOnClickListener {
-            getFirestoreCollection(docRef,"keyboard")
+            val intent = Intent(requireActivity().applicationContext,FragmentCategory::class.java)
+            intent.putExtra("keyboard",keyboard)
+            requireContext().startActivity(intent)
+           // getFirestoreCollection(docRef,"keyboard")
         }
 
         return viewroot
     }
 
-    private fun getFirestoreCollection(docRef: CollectionReference, category: String) {
-        docRef.get().addOnSuccessListener { documentSnapshot ->
-            val city = documentSnapshot.toObjects<Products>()
-            for(eachIndex in city.indices){
-                if(eachIndex!=null){
-                    mUploads.add(city[eachIndex])
-                }
-            }
-        }
-    }
 
 }

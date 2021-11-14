@@ -64,5 +64,7 @@
     <string name="Monitors">Monitors</string>
     <string name="Phones">Phones</string>
     <string name="GamePad">Game Controllers</string>
-    <string name="SearchItem">Search Iten</string>
+    <string name="SearchItem">Search Item</string>
+    <string name="your_cart_list">Your Cart List</string>
+    <string name="search">Search</string>
 </resources>

@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diplomich.ViewModel.Cart
@@ -25,6 +27,8 @@ private lateinit var mAdapter: CartAdapter
 private lateinit var fAuth: FirebaseAuth
 private lateinit var userId:String
 private lateinit var totalPrice:String
+private lateinit var imageVertButton:ImageButton
+private lateinit var db: FirebaseFirestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +42,9 @@ private lateinit var totalPrice:String
         userId = fAuth.currentUser!!.uid
         priceButton = root.findViewById(R.id.price_button)
         recyclerCart = root.findViewById(R.id.recycler_cart)
+        imageVertButton = root.findViewById(R.id.imageAllVertical)
+        db = FirebaseFirestore.getInstance()
+
         recyclerCart.setHasFixedSize(true)
         recyclerCart.layoutManager = LinearLayoutManager(root.context)
 
@@ -45,6 +52,10 @@ private lateinit var totalPrice:String
             val intent = Intent(root.context,ConfirmOrderActivity::class.java)
             intent.putExtra("Total price",priceButton.text.toString())
             startActivity(intent)
+        }
+
+        imageVertButton.setOnClickListener{
+            deleteAllFiles()
         }
 
         val docRef = mDatabaseRef1.collection("CartList").document(userId)
@@ -70,6 +81,17 @@ private lateinit var totalPrice:String
         }
 
         return root
+    }
+
+    private fun deleteAllFiles() {
+        db.collection("CartList").document(userId).delete()
+            .addOnSuccessListener {
+                Toast.makeText(context, "REMOVED", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
+            }
+
     }
 
 }
