@@ -18,29 +18,15 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/admin"
-            android:layout_width="260dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_centerVertical="true"
+            android:layout_marginStart="45dp"
             android:background="@android:color/white"
-            android:padding="9dp"
-            android:hint="@string/SearchItem"
-            android:textStyle="bold"
-
-            />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_toRightOf="@+id/admin"
-            android:background="@color/purple_700"
             android:drawableLeft="@drawable/ic_search_24"
-            android:padding="11dp"
-            android:text="@string/search"
-            android:textSize="16dp"
+            android:hint="@string/SearchItem"
+            android:padding="4dp"
             android:textStyle="bold" />
+
 
     </RelativeLayout>
 

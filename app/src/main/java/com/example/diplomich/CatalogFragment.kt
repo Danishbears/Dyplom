@@ -32,7 +32,6 @@ class CatalogFragment : Fragment() {
     private lateinit var layout6:View
     private var mouse:String = "mouse"
     private var keyboard:String = "keyboard"
-    private lateinit var buttonSearch:Button
     private lateinit var adminString:EditText
 
     override fun onCreateView(
@@ -48,9 +47,11 @@ class CatalogFragment : Fragment() {
         layout5 = viewroot.findViewById(R.id.Linear5)
         layout6 = viewroot.findViewById(R.id.Linear6)
         adminString = viewroot.findViewById(R.id.admin)
-        buttonSearch = viewroot.findViewById(R.id.button_search)
+        adminString.isSelected = false
+        adminString.isFocusable = false
 
-        buttonSearch.setOnClickListener {
+
+        adminString.setOnClickListener {
             val intent = Intent(requireActivity().applicationContext,SearchFragment::class.java)
             intent.putExtra("string",adminString.text.toString())
             requireContext().startActivity(intent)

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -46,28 +47,36 @@ private lateinit var query:Query
         inflater.inflate(R.menu.menu_search,menu)
         var item: MenuItem = menu!!.findItem(R.id.search)
         var searchView: SearchView = item.actionView as SearchView
-
+        searchView.isFocusable = true;
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 Log.d("ChechOut",query.toString())
-
+               // recyclerCart.visibility = View.VISIBLE
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 Log.d("CheckOut",newText.toString())
-
+                recyclerCart.visibility = View.VISIBLE
                 adapter1.filter.filter(newText)
                 return false
             }
 
         })
+
+        searchView.setOnQueryTextFocusChangeListener(object :View.OnFocusChangeListener{
+            override fun onFocusChange(v: View?, hasFocus: Boolean) {
+                if (hasFocus) {
+                    recyclerCart.visibility = View.GONE
+                } else if (!hasFocus) {
+                    recyclerCart.visibility = View.GONE
+                }
+            }
+        })
         return true
     }
 
     private fun processSearch(query1: String?) {
-        Log.d("I'm here",query.toString())
-
 
         val docRef = fStore.collection("products")
         docRef.get().addOnSuccessListener { documentSnapshot ->
@@ -77,9 +86,16 @@ private lateinit var query:Query
                     mUploads.add(city[eachIndex])
                 }
             }
+            if(mUploads.isEmpty()){
+                Toast.makeText(this,"Empty",Toast.LENGTH_SHORT).show()
+            }
+            if(mUploads.isNotEmpty()){
+                //Toast.makeText(this,"Empty",Toast.LENGTH_SHORT).show()
+                adapter1 = FindItem(mUploads)
+                recyclerCart.adapter = adapter1
+                recyclerCart.visibility = View.GONE
 
-            adapter1 = FindItem(mUploads)
-            recyclerCart.adapter = adapter1
+            }
 
     }
     }
