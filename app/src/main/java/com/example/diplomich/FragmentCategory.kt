@@ -87,8 +87,9 @@ class FragmentCategory : AppCompatActivity() {
             val city = documentSnapshot.toObjects<Products>()
             for(eachIndex in city.indices){
                 if(eachIndex!=null){
-                    mUploads.add(city[eachIndex])
-                }
+                    if(city.get(eachIndex).category == category){
+                    mUploads.add(city[eachIndex])}}
+
             }
             catalogAdapter = CatalogAdapter(applicationContext,mUploads,category)
             mRecyclerView.adapter = catalogAdapter

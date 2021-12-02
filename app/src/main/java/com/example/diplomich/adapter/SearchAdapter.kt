@@ -1,8 +1,5 @@
 package com.example.diplomich.adapter
 
-import android.content.Context
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,45 +7,48 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.diplomich.ProductDetailsActivity
 import com.example.diplomich.R
 import com.example.diplomich.ViewModel.Products
-import com.example.diplomich.`interface`.ClickInteface
-import com.google.firebase.firestore.FirebaseFirestore
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
-class SearchAdapter(var context: Context,
-                    var list:List<Products>,
-                    var search:String): RecyclerView.Adapter<SearchAdapter.MyViewHolder>() {
-    lateinit var onItemListener: ClickInteface
+class SearchAdapter(var options: FirestoreRecyclerOptions<Products>):
+    FirestoreRecyclerAdapter<Products, SearchAdapter.MyViewHolder>(options) {
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchAdapter.MyViewHolder {
-        val view: View = LayoutInflater.from(context).inflate(R.layout.activity_search_item,parent,false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.popular_item,parent,false)
         return MyViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: SearchAdapter.MyViewHolder, position: Int) {
-        if(search.isNotEmpty()){
-            val results:MutableList<Products> = ArrayList()
-            for(product:Products in list){
-                if(product.name !=null && product.name!!.contains(search)){
-                    results.add(product)
-                }
-            }
-            MyAdapter(context,results)
-        }
+
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int, product: Products) {
+            //val products:Products = list[position]
+            holder.productName.text = product.name
+            holder.productPrice.text = product.price
+            holder.description.text = product.description
+
+            /*Glide.with(holder.imageView.context)
+                .load(product.image)
+                .into(holder.imageView)*/
+
+        Glide.with(holder.imageView.context)
+            .load("https://firebasestorage.googleapis.com/v0/b/dyplom-867af.appspot.com/o/Product%20Images%2Fimage%3A24Oct%2029%2C%20202114%3A11%3A02.jpg?alt=media&token=ed745a9f-2a68-47fe-a217-27efb6328609")
+            .into(holder.imageView)
     }
 
-    override fun getItemCount(): Int {
-        return list.size
-    }
-
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val productName = itemView.findViewById(R.id.product_name) as TextView
+        val productPrice = itemView.findViewById(R.id.product_price) as TextView
         val description = itemView.findViewById(R.id.product_description) as TextView
         val imageView = itemView.findViewById(R.id.image_product) as ImageView
-        private lateinit var mDatabaseRef1: FirebaseFirestore
-        val docRef = mDatabaseRef1.collection("products")
 
     }
+
+
 
 
 }

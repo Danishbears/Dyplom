@@ -15,7 +15,7 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:theme">
         <activity
-            android:name=".SearchItem"
+            android:name=".SearchFragment"
             android:exported="false" />
         <activity
             android:name=".Admin.AdminViewUserProducts"
