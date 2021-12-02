@@ -9,7 +9,6 @@ class UserOrders {
     var phone:String?=null
     var time:String?=null
 
-
     constructor() {}
     constructor(
         id:String?,

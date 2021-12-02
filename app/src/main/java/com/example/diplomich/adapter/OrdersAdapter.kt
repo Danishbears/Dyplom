@@ -2,8 +2,12 @@ package com.example.diplomich.adapter
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.os.Build
+import android.provider.Settings.Global.getString
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,15 +15,21 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
-import com.example.diplomich.Admin.AdminNewOrderActivity
 import com.example.diplomich.Admin.AdminViewUserProducts
+import com.example.diplomich.MainActivity
 import com.example.diplomich.R
 import com.example.diplomich.ViewModel.UserOrders
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class OrdersAdapter(
     var context: Context,
@@ -55,6 +65,7 @@ class OrdersAdapter(
                             holder.db.collection("Orders").document(products.id.toString())
                                 .delete()
                                 .addOnSuccessListener {
+                                    addToAnotherDb(products.id,holder)
                                     Toast.makeText(context, "REMOVED", Toast.LENGTH_SHORT).show()
                                 }
                                 .addOnFailureListener {
@@ -75,6 +86,35 @@ class OrdersAdapter(
             holder.itemView.context.startActivity(intent)
         }
 
+    }
+
+    private fun addToAnotherDb(id: String?, holder: OrdersAdapter.MyViewHolder) {
+        val saveCurrentDate:String
+        val saveCurrentTime:String
+        val calForData: Calendar = Calendar.getInstance()
+        var currentData: SimpleDateFormat = SimpleDateFormat("MMM dd, yyyy")
+        saveCurrentDate = currentData.format(calForData.time)
+
+        val currentTime: SimpleDateFormat = SimpleDateFormat("HH:mm:ss")
+        saveCurrentTime = currentTime.format(calForData.time)
+        val orderMap: HashMap<String, Any> = hashMapOf(
+            "id" to id.toString(),
+            "TotalPrice" to holder.productPrice.toString(),
+            "date" to saveCurrentDate,
+            "time" to  saveCurrentTime,
+            "phone" to holder.phone.text.toString(),
+            "name" to holder.productName.text.toString(),
+            "address" to holder.address.text.toString())
+
+        var documentReference: DocumentReference = holder.db.collection("Maded").document(id.toString())
+        documentReference.set(orderMap).addOnSuccessListener {
+
+            Toast.makeText(context,"Order added successfully", Toast.LENGTH_SHORT).show()
+        }
+            .addOnFailureListener{
+                Toast.makeText(context,"${it.message}",Toast.LENGTH_SHORT)
+                    .show()
+            }
     }
 
     override fun getItemCount(): Int {
