@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User name"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/user_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User phone"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textColor="@color/purple_500"
+            android:textStyle="bold"
+            android:layout_below="@id/user_name"
+            />
+        <TextView
+            android:id="@+id/order_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Order address"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textColor="@color/purple_500"
+            android:textStyle="bold"
+            android:layout_below="@id/user_phone"
+            />
+        <TextView
+            android:id="@+id/order_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total price"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textColor="@color/purple_500"
+            android:textStyle="bold"
+            android:layout_below="@id/order_address"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/check_user_prod_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_products"
+            android:layout_below="@id/order_price"
+            android:textSize="16sp"
+            android:background="@android:color/darker_gray"
+            android:textColor="@color/black"/>
+
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>

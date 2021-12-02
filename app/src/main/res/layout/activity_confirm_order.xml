@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfirmOrderActivity">
+
+    <TextView
+        android:id="@+id/ApplyText"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:textStyle="bold"
+        android:layout_marginTop="15sp"
+        android:text="@string/contact_details"
+        android:textAlignment="center"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/EditTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ApplyText"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="40dp"
+        android:gravity="center"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        android:hint="@string/Name"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/EditTextSurName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EditTextName"
+        android:layout_marginLeft="40dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:hint="@string/LastName"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/EditTextPhoneNumber"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EditTextSurName"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:hint="@string/Phone"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/EditTextAddress"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EditTextPhoneNumber"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:hint="@string/address"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        android:textSize="24sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/EditTextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20sp"
+        android:layout_below="@id/EditTextAddress"
+        android:text="@string/Continue"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        android:background="@drawable/custom_button"
+        android:layout_marginRight="40dp" />
+
+</RelativeLayout>
