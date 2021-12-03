@@ -6,8 +6,8 @@
 
     <TextView
         android:id="@+id/notification_badge"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:gravity="top|center_horizontal"
         android:layout_marginStart="40dp"
         android:fontFamily="sans-serif"
