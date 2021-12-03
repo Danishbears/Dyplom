@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/drawable/badge_count.xml" value="0.11388888888888889" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/drawable/custom_button.xml" value="0.2703125" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/drawable/divider.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/drawable/edittextround.xml" value="0.1" />
@@ -22,6 +23,7 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_register.xml" value="0.21693840579710144" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_search_item.xml" value="0.12335359675785208" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/admin_user_view.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/badge_text.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/cart_item_layout.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/fragment_cart.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/fragment_catalog.xml" value="0.264" />
@@ -31,6 +33,7 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/fragment_more.xml" value="0.1947463768115942" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/fragment_search.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/home_products.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/notification_view.xml" value="0.17391304347826086" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/orders_layout.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/popular_item.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/searchitem.xml" value="0.1" />

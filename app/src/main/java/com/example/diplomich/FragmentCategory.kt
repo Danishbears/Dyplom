@@ -11,7 +11,6 @@ import com.example.diplomich.ViewModel.Cart
 import com.example.diplomich.ViewModel.Products
 import com.example.diplomich.adapter.CatalogAdapter
 import com.example.diplomich.adapter.MyAdapter
-import com.example.diplomich.adapter.SearchAdapter
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
@@ -26,7 +25,7 @@ class FragmentCategory : AppCompatActivity() {
     private lateinit var searchItem:EditText
     private lateinit var searchButton:Button
     private lateinit var searchInput:String
-    private lateinit var mAdapter: SearchAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?){
         // Inflate the layout for this fragment

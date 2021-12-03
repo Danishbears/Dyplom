@@ -1,32 +1,76 @@
 package com.example.diplomich
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.diplomich.ViewModel.Ordered
 import com.example.diplomich.ViewModel.Products
 import com.example.diplomich.adapter.MyAdapter
+import com.example.diplomich.adapter.NotificationAdapter
 import com.example.diplomich.adapter.OrdersAdapter
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.firestore.ktx.toObjects
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 
 class FavoritesFragment : Fragment() {
     private lateinit var fr: FirebaseFirestore
+    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var fAuth: FirebaseAuth
+
+    private lateinit var mAdapter: NotificationAdapter
+    private lateinit var mUploads:MutableList<Ordered>
+    private lateinit var uid:String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val root:View = inflater.inflate(R.layout.fragment_favorites, container, false)
+        val root = inflater.inflate(R.layout.fragment_favorites, container, false)
+        fAuth = FirebaseAuth.getInstance()
+        fr = FirebaseFirestore.getInstance()
+        uid = fAuth.currentUser!!.uid
+        mUploads = ArrayList()
+        mRecyclerView = root.findViewById(R.id.recycler_notification)
+        mRecyclerView.setHasFixedSize(true)
+        mRecyclerView.layoutManager = LinearLayoutManager(root.context)
+        /*val docRef = fr.collection("Maded")
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+            val city = documentSnapshot.toObjects<Ordered>()
+            val check:Ordered = Ordered()
+            for(eachIndex in city.indices){
+                if(eachIndex!=null){
+                    mUploads.add(city[eachIndex])
+                }
+            }
+            mAdapter = NotificationAdapter(requireActivity().applicationContext,mUploads)
+            mRecyclerView.adapter = mAdapter
+            //Log.d("VIBECHEdada", city[0].toString())
+        }*/
+
+        val docRef = fr.collection("Maded").document(uid).collection("ToUser")
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+            val city = documentSnapshot.toObjects<Ordered>()
+            for (eachIndex in city.indices) {
+                if (eachIndex != null) {
+                    mUploads.add(city[eachIndex])
+                }
+            }
+            mAdapter = NotificationAdapter(requireActivity().applicationContext, mUploads)
+            mRecyclerView.adapter = mAdapter
+        }
         return root
     }
 

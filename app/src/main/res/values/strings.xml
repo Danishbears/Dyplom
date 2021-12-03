@@ -67,4 +67,5 @@
     <string name="SearchItem">Search Item</string>
     <string name="your_cart_list">Your Cart List</string>
     <string name="search">Search Product</string>
+    <string name="ordered_time">Order time</string>
 </resources>

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codinginflow.searchviewexample.FindItem
 import com.example.diplomich.ViewModel.Products
-import com.example.diplomich.adapter.SearchAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,7 +20,6 @@ class SearchFragment : AppCompatActivity() {
 
 private lateinit var adminSearch:String
 private lateinit var inflater: MenuInflater
-private lateinit var adapter:SearchAdapter
 private lateinit var adapter1: FindItem
 private lateinit var recyclerCart: RecyclerView
 private lateinit var fStore: FirebaseFirestore

@@ -104,9 +104,10 @@ class OrdersAdapter(
             "time" to  saveCurrentTime,
             "phone" to holder.phone.text.toString(),
             "name" to holder.productName.text.toString(),
-            "address" to holder.address.text.toString())
+            "address" to holder.address.text.toString(),
+        "isChecked" to 1 )
 
-        var documentReference: DocumentReference = holder.db.collection("Maded").document(id.toString())
+        var documentReference: DocumentReference = holder.db.collection("Maded").document(id.toString()).collection("ToUser").document(saveCurrentTime)
         documentReference.set(orderMap).addOnSuccessListener {
 
             Toast.makeText(context,"Order added successfully", Toast.LENGTH_SHORT).show()
