@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diplomich.ViewModel.Ordered
@@ -79,8 +80,53 @@ class FavoritesFragment : Fragment() {
             mAdapter = NotificationAdapter(requireActivity().applicationContext, mUploads)
             mRecyclerView.adapter = mAdapter
         }
+        checkFragmentVisibility()
         return root
     }
+
+    private fun checkFragmentVisibility() {
+        val test: FavoritesFragment? = activity?.supportFragmentManager
+            ?.findFragmentByTag("testID") as? FavoritesFragment
+        if (test != null && test.isVisible) {
+            Toast.makeText(requireContext().applicationContext, "Check INgo", Toast.LENGTH_SHORT)
+                .show()
+        } else {
+            //Toast.makeText(requireContext().applicationContext, "Didnds", Toast.LENGTH_SHORT).show()
+            val docRef = fr.collection("Maded").document(uid).collection("ToUser")
+            docRef.get().addOnSuccessListener { documentSnapshot ->
+                val city = documentSnapshot.toObjects<Ordered>()
+                for (eachIndex in city.indices) {
+                    if (eachIndex != null) {
+                        val products: Ordered = mUploads[eachIndex]
+                        fr.collection("Maded").document(uid).collection("ToUser")
+                            .document(products.time.toString())
+                            .update("isChecked", 0)
+                    }
+                }
+            }
+        }
+    }
+
+   /* override fun onHiddenChanged(hidden: Boolean) {
+        if(hidden){
+           /* val washingtonRef = fr.collection("Maded").document(uid).collection("ToUser")
+            washingtonRef
+                .update("isChecked", 0)
+                .addOnSuccessListener { Log.d("YEah", "DocumentSnapshot successfully updated!") }
+                .addOnFailureListener { e -> Log.w("Bad", "Error updating document", e) }*/
+          /*  val docRef = fr.collection("Maded").document(uid).collection("ToUser")
+            docRef.get().addOnSuccessListener { documentSnapshot ->
+                val city = documentSnapshot.toObjects<Ordered>()
+                for (eachIndex in city.indices) {
+                    if (eachIndex != null) {
+                        val products: Ordered = mUploads[eachIndex]
+                        products.isChecked = 0
+                    }
+                }
+            }*/
+        }
+        super.onHiddenChanged(hidden)
+    }*/
 
     /*private fun notificationMessage(id: String?, holder: OrdersAdapter.MyViewHolder) {
         holder.db.collection("Orders").document(id!!).addSnapshotListener { snapshot, e ->

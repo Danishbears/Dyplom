@@ -27,10 +27,13 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.android.gms.tasks.Task
 
 import androidx.annotation.NonNull
+import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 
 import com.google.android.gms.tasks.OnCompleteListener
-
-
+import com.google.firebase.firestore.MetadataChanges
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -52,36 +55,37 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController,appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)
         initializeMet()
-        checkOrders()
+        GlobalScope.launch {
+        checkOrders()}
     }
 
     private fun checkOrders() :Int{
         val docRef = fr.collection("Maded").document(uid).collection("ToUser")
         var counter:Int = 0
-       /* docRef.get().addOnSuccessListener { documentSnapshot ->
-            val city = documentSnapshot.toObjects<Ordered>()
-            for (eachIndex in city.indices) {
-                Log.d("CcheckPacek",eachIndex.toString())
-               /* if(city[eachIndex].isChecked == 1){
-                    mUploads.add(city[eachIndex])*/
-                if (eachIndex != null) {
-                    mUploads.add(city[eachIndex])
-                }
-           // }
-            }
-            counter = mUploads.size
-            getItemCount(counter)
-
-        }*/
-
-         fr.collection("Maded").document(uid).collection("ToUser").whereEqualTo("isChecked",1)
-             .get().addOnSuccessListener {
-                 counter = it.size()
-                 getItemCount(counter)
-             }
-
+        checkSize()
+        fr.collection("Maded").document(uid).collection("ToUser").addSnapshotListener{snapshot,e->
+        if (e != null) {
+            Log.w("ListenerCollection", "Listen failed.", e)
+            return@addSnapshotListener
+        }
+        if (snapshot != null) {
+            Log.d("CheckNotNull","${snapshot.documentChanges}")
+            checkSize()
+        } else {
+            Log.d("CheckNull", "Current data: null")
+        }
+        }
 
         return counter
+    }
+
+    private fun checkSize(){
+        var counter:Int = 0
+        fr.collection("Maded").document(uid).collection("ToUser").whereEqualTo("isChecked",1)
+            .get().addOnSuccessListener {
+                counter = it.size()
+                getItemCount(counter)
+            }
     }
 
     private fun getItemCount(counter: Int) {
@@ -98,6 +102,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateBadgeCount(count: Int = 0){
        // Toast.makeText(this,"${count}",Toast.LENGTH_SHORT).show()
+
         val itemView = bottomNavigationView.getChildAt(2) as? BottomNavigationItemView
 
         notificationBadges = LayoutInflater.from(this)
