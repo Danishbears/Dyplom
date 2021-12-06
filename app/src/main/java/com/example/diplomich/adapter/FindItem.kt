@@ -1,5 +1,7 @@
 package com.codinginflow.searchviewexample
 
+import android.content.Intent
+import android.util.Log
 import com.example.diplomich.R
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.diplomich.ProductDetailsActivity
 import com.example.diplomich.ViewModel.Products
 
 
@@ -50,6 +53,14 @@ class FindItem(exampleList: MutableList<Products>) :
         Glide.with(holder.imageView.context)
             .load("https://firebasestorage.googleapis.com/v0/b/dyplom-867af.appspot.com/o/Product%20Images%2Fimage%3A24Oct%2029%2C%20202114%3A11%3A02.jpg?alt=media&token=ed745a9f-2a68-47fe-a217-27efb6328609")
             .into(holder.imageView)
+
+        holder.imageView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, ProductDetailsActivity::class.java)
+            intent.putExtra("pid", currentItem.pid)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK;
+            holder.itemView.context.startActivity(intent)
+
+        }
     }
 
     override fun getItemCount(): Int {
