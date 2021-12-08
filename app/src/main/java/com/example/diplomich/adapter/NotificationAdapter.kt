@@ -1,5 +1,6 @@
 package com.example.diplomich.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -27,11 +28,12 @@ class NotificationAdapter(var context: Context,
 
 
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: NotificationAdapter.MyViewHolder, position: Int) {
             val products: Ordered = list[position]
-            holder.productName.text = products.name
-            holder.address.text = products.address
-            holder.time.text = products.time
+            holder.productName.text = "Name: ${products.name}"
+            holder.address.text = "Address: ${products.address}"
+            holder.time.text = "Ordered time: ${products.date},${products.time}"
 
     }
 

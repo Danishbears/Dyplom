@@ -15,8 +15,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.diplomich.ViewModel.Cart
 import com.example.diplomich.adapter.CartAdapter
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
+import android.os.Build
+import androidx.fragment.app.FragmentTransaction
+
 
 class CartFragment : Fragment() {
 private lateinit var recyclerCart:RecyclerView
@@ -58,8 +62,20 @@ private lateinit var db: FirebaseFirestore
             deleteAllFiles()
         }
 
-        val docRef = mDatabaseRef1.collection("CartList").document(userId)
-            .collection("ProductId")
+        val docRef = mDatabaseRef1.collection("CartList").document(userId).collection("ProductId")
+
+      /*  mDatabaseRef1.collection("CartList").document(userId).collection("ProductId").addSnapshotListener{snapshot,e->
+            if (e != null) {
+                Log.w("ListenerCollection", "Listen failed.", e)
+                return@addSnapshotListener
+            }
+            if (snapshot != null) {
+                Log.d("CheckNotNull","${snapshot.documentChanges}")
+                checkUpdate()
+            } else {
+                Log.d("CheckNull", "Current data: null")
+            }
+        }*/
 
         var totalCount:Int =0
         docRef.get().addOnSuccessListener { documentSnapshot ->
@@ -79,8 +95,63 @@ private lateinit var db: FirebaseFirestore
             mAdapter = CartAdapter(requireActivity().applicationContext,mUploads,activity)
             recyclerCart.adapter = mAdapter
         }
-
+        //checkUpdate()
         return root
+    }
+
+    private fun checkUserCart() {
+        /*var totalCount:Int =0
+        val docRef = mDatabaseRef1.collection("CartList").document(userId)
+            .collection("ProductId")
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+            val city = documentSnapshot.toObjects<Cart>()
+            for (eachIndex in city.indices) {
+                if (eachIndex != null) {
+                    mUploads.add(city[eachIndex])
+                }
+            }
+            for (eachPrice in city.indices) {
+                totalCount += city[eachPrice].price?.toInt()!!
+
+            }
+            totalPrice = totalCount.toString()
+            priceButton.text = totalPrice
+
+            mAdapter = CartAdapter(requireActivity().applicationContext, mUploads, activity)
+            recyclerCart.adapter = mAdapter
+        }*/
+
+        val ft: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
+        if (Build.VERSION.SDK_INT >= 26) {
+            ft.setReorderingAllowed(false)
+        }
+        ft.detach(this).attach(this).commit()
+
+    }
+    private fun checkUpdate(){
+        mDatabaseRef1.collection("CartList").document(userId).collection("ProductId")
+            .addSnapshotListener { snapshots, e ->
+                if (e != null) {
+                    Log.w("Ych", "listen:error", e)
+                    return@addSnapshotListener
+                }
+
+                for (dc in snapshots!!.documentChanges) {
+                    when (dc.type) {
+                        DocumentChange.Type.ADDED -> {Log.d("NewWyser", "New city: ${dc.document.data}")
+                           // checkUserCart()
+                        }
+                        DocumentChange.Type.MODIFIED -> {Log.d("Modify", "Modified city: ${dc.document.data}")
+                           // checkUserCart()
+                        }
+                        DocumentChange.Type.REMOVED -> {
+                            Log.d("Removed", "Removed city: ${dc.document.data}")
+                            checkUserCart()
+                        }
+                    }
+                }
+            }
     }
 
     private fun deleteAllFiles() {
