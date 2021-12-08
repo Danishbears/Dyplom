@@ -1,5 +1,6 @@
 package com.example.diplomich
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
 import android.os.Build
 import androidx.fragment.app.FragmentTransaction
+import com.example.diplomich.ViewModel.Ordered
+import com.example.diplomich.ViewModel.Products
 
 
 class CartFragment : Fragment() {
@@ -155,14 +158,41 @@ private lateinit var db: FirebaseFirestore
     }
 
     private fun deleteAllFiles() {
-        db.collection("CartList").document(userId).delete()
-            .addOnSuccessListener {
-                Toast.makeText(context, "REMOVED", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
-            }
 
+        val builder = AlertDialog.Builder(activity)
+        builder.setTitle("Do you want to delete all these items")
+        builder.setSingleChoiceItems(
+            CartFragment.arrayChoice,-1
+        ) { dialog, which ->
+            if (which == 0) {
+                val docRef =   db.collection("CartList").document(userId).collection("ProductId")
+                docRef.get().addOnSuccessListener {documentSnapshot ->
+                    val city = documentSnapshot.toObjects<Products>()
+                    for (eachIndex in city.indices) {
+                        if (eachIndex != null) {
+                            val products: Cart = mUploads[eachIndex]
+                            db.collection("CartList").document(userId)
+                                .collection("ProductId")
+                                .document(products.pid.toString()).delete()
+                                .addOnSuccessListener {
+                                    Toast.makeText(context, "REMOVED", Toast.LENGTH_SHORT).show()
+                                }
+                                .addOnFailureListener {
+                                    Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                    }
+                }
+            } else if (which == 1) {
+                dialog.dismiss()
+            }
+            dialog.dismiss()
+        }
+        val mDialog:AlertDialog = builder.create()
+        mDialog.show()
+    }
+    companion object{
+        val arrayChoice = arrayOf("Yes","No")
     }
 
 }

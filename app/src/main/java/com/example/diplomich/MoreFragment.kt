@@ -25,10 +25,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import okio.Timeout
 import java.util.*
 
-
-
-
-
 class MoreFragment : Fragment(){
     private lateinit var userEmail: TextView
     private lateinit var userPhone: TextView
