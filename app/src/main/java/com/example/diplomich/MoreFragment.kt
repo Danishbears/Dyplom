@@ -8,7 +8,9 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
 import android.widget.*
@@ -45,7 +47,7 @@ class MoreFragment : Fragment(){
     ): View? {
         // Inflate the layout for this fragment
         val rootView: View = inflater.inflate(R.layout.fragment_more, container, false)
-        loadLocale()
+        //loadLocale()
         userEmail = rootView.findViewById(R.id.userEmailInfo) as TextView
         userPhone = rootView.findViewById(R.id.userPhoneNumber)
         userName = rootView.findViewById(R.id.HelloUserName)
@@ -152,8 +154,10 @@ class MoreFragment : Fragment(){
         ) { dialog, which ->
             if (which == 0) {
                 setLocale("en")
+                fStore.collection("users").document(userId).update("lang", "en")
             } else if (which == 1) {
                 setLocale("pl")
+                fStore.collection("users").document(userId).update("lang", "pl")
             }
             dialog.dismiss()
         }
@@ -165,20 +169,26 @@ class MoreFragment : Fragment(){
     @SuppressLint("CommitPrefEdits")
     private fun setLocale(lang: String) {
         val locale: Locale = Locale(lang)
-        Locale.setDefault(locale)
+       /* Locale.setDefault(locale)
         val conf:Configuration = Configuration()
         conf.locale = locale
         activity?.baseContext?.resources?.updateConfiguration(conf, requireActivity().baseContext.resources.displayMetrics)
         val editor = this.activity?.getSharedPreferences("Settings",MODE_PRIVATE)?.edit()
         editor?.putString("My Lang",lang)
-        editor?.apply()
+        editor?.apply()*/
+
+        val res: Resources = resources
+        val dm: DisplayMetrics = res.displayMetrics
+        val conf:Configuration = res.configuration
+        conf.locale = locale
+        res.updateConfiguration(conf,dm)
     }
 
-    private fun loadLocale(){
+    /*private fun loadLocale(){
         val editor = this.activity?.getSharedPreferences("Settings",MODE_PRIVATE)
         val language: String? = editor?.getString("My Lang","")
         setLocale(language.toString())
-    }
+    }*/
 
 
     private fun emailSent(user: FirebaseUser) {

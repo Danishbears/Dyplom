@@ -1,5 +1,6 @@
 package com.example.diplomich
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -39,7 +40,13 @@ import com.google.android.material.internal.ContextUtils.getActivity
 import java.util.*
 import kotlin.collections.ArrayList
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Handler
+import android.util.DisplayMetrics
+import android.content.SharedPreferences
+
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -69,7 +76,9 @@ class MainActivity : AppCompatActivity() {
 
             // etc ...
         }*/
-
+      //  loadLocale()
+        checkStateActivity()
+        languageCheck()
         GlobalScope.launch {
             checkOrders()
         }
@@ -87,38 +96,83 @@ class MainActivity : AppCompatActivity() {
                 return@addSnapshotListener
             }
 
-
             if(snapshot?.getString("lang") == "en"){
-                val intent = intent
-                finish()
-                startActivity(intent)
-                val locale: Locale = Locale(snapshot.getString("lang"))
-                Locale.setDefault(locale)
-                val conf: Configuration = Configuration()
-                conf.locale = locale
-                this.baseContext?.resources?.updateConfiguration(conf, this.baseContext.resources.displayMetrics)
-                val editor = this.getSharedPreferences("Settings", MODE_PRIVATE)?.edit()
-                editor?.putString("My Lang",snapshot?.getString("lang"))
-                editor?.apply()
+
+                setLocale(snapshot.getString("lang").toString())
             }
             else if(snapshot?.getString("lang") == "pl"){
-                val intent = intent
-                finish()
-                startActivity(intent)
-               // AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                //Toast.makeText(this,"Polish",Toast.LENGTH_SHORT).show()
-                val locale: Locale = Locale(snapshot.getString("lang"))
-                Locale.setDefault(locale)
-                val conf: Configuration = Configuration()
-                conf.locale = locale
-                this.baseContext?.resources?.updateConfiguration(conf, this.baseContext.resources.displayMetrics)
-                val editor = this.getSharedPreferences("Settings", MODE_PRIVATE)?.edit()
-                editor?.putString("My Lang",snapshot?.getString("lang"))
-                editor?.apply()
+
+                setLocale(snapshot.getString("lang").toString())
             }
         }
     }
 
+    override fun onStart() {
+
+       /* val sp = getSharedPreferences(
+            MainActivity.counti.toString(),
+            MODE_PRIVATE
+        )
+        // проверяем, первый ли раз открывается программа
+        // проверяем, первый ли раз открывается программа
+        val int = sp.getInt("hasFirst",count)
+        if(int==0){
+            count.dec()
+            Log.d("CheckCounti",counti.toString())
+            val refresh = Intent(this, MainActivity::class.java)
+            finish()
+            startActivity(refresh)
+        }
+        if(int>0){
+
+        }*/
+        super.onStart()
+    }
+
+    @SuppressLint("CommitPrefEdits")
+    private fun setLocale(lang: String) {
+        val locale: Locale = Locale(lang)
+       /* Locale.setDefault(locale)
+        val conf:Configuration = Configuration()
+        conf.locale = locale
+        this?.baseContext?.resources?.updateConfiguration(conf, this.baseContext.resources.displayMetrics)
+        val editor = this.getSharedPreferences("Settings", MODE_PRIVATE)?.edit()
+        editor?.putString("My Lang",lang)
+        editor?.apply()*/
+
+        val res:Resources = resources
+        val dm:DisplayMetrics = res.displayMetrics
+        val conf:Configuration = res.configuration
+        conf.locale = locale
+        res.updateConfiguration(conf,dm)
+       /* val refresh = Intent(this, MainActivity::class.java)
+        finish()
+        startActivity(refresh)*/
+        checkStateActivity()
+    }
+
+    private fun checkStateActivity() {
+        val sp = getSharedPreferences(
+            MainActivity.counti.toString(),
+            MODE_PRIVATE
+        )
+        // проверяем, первый ли раз открывается программа
+        // проверяем, первый ли раз открывается программа
+        val int = sp.getInt("hasFirst",count)
+        if(int==0){
+            counti.inc()
+            Log.d("CheckCounti",counti.toString())
+            val refresh = Intent(this, MainActivity::class.java)
+            finish()
+            startActivity(refresh)
+        }
+    }
+
+    private fun loadLocale(){
+        val editor = this?.getSharedPreferences("Settings", MODE_PRIVATE)
+        val language: String? = editor?.getString("My Lang","")
+        setLocale(language.toString())
+    }
 
     private fun checkOrders() :Int{
         val docRef = fr.collection("Maded").document(uid).collection("ToUser")
@@ -166,5 +220,8 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView.addView(notificationBadges)
     }
+companion object{
+    private val counti:Int = 1
+}
 
 }
