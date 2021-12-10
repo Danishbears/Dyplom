@@ -73,7 +73,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.firebaseui:firebase-ui-firestore:4.1.0'
     implementation 'com.cepheuen.elegant-number-button:lib:1.0.3'
-
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
     implementation platform('com.google.firebase:firebase-bom:29.0.1')
 
     // Declare the dependencies for the Firebase Cloud Messaging and Analytics libraries
