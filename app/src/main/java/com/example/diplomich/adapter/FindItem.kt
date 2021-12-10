@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.diplomich.ProductDetailsActivity
 import com.example.diplomich.ViewModel.Products
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.main.popular_item.view.*
 
 
 class FindItem(exampleList: MutableList<Products>) :
@@ -27,7 +30,7 @@ class FindItem(exampleList: MutableList<Products>) :
         var imageView: ImageView
         var textView1: TextView
         var textView2: TextView
-
+        lateinit var db: StorageReference
         init {
            imageView = itemView.findViewById(R.id.image_product)
             textView1 = itemView.findViewById(R.id.product_name)
@@ -50,10 +53,17 @@ class FindItem(exampleList: MutableList<Products>) :
         holder.textView1.text = currentItem.name
         holder.textView2.text = currentItem.price
 
-        Glide.with(holder.imageView.context)
-            .load("https://firebasestorage.googleapis.com/v0/b/dyplom-867af.appspot.com/o/Product%20Images%2Fimage%3A24Oct%2029%2C%20202114%3A11%3A02.jpg?alt=media&token=ed745a9f-2a68-47fe-a217-27efb6328609")
-            .into(holder.imageView)
 
+        holder.db = FirebaseStorage.getInstance().getReference("Product Images/")
+        holder.db.child("${currentItem.pid}.jpg").downloadUrl.addOnCompleteListener{task->
+            currentItem.image = task.result.toString()
+            Glide.with(holder.imageView.context)
+                .load(currentItem.image)
+                .into(holder.imageView.image_product)
+        }
+            .addOnFailureListener{
+                Log.d("FailedCompleteListener",it.message.toString())
+            }
         holder.imageView.setOnClickListener {
             val intent = Intent(holder.itemView.context, ProductDetailsActivity::class.java)
             intent.putExtra("pid", currentItem.pid)

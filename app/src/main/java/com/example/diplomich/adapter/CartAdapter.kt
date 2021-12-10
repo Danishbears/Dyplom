@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,9 @@ import com.example.diplomich.R
 import com.example.diplomich.ViewModel.Cart
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.main.popular_item.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -45,6 +49,17 @@ class CartAdapter(
         holder.productName.text = productsCart.name
         holder.productPrice.text = productsCart.price
         holder.description.text = productsCart.description
+
+        holder.bd = FirebaseStorage.getInstance().getReference("Product Images/")
+        holder.bd.child("${productsCart.pid}.jpg").downloadUrl.addOnCompleteListener{task->
+            productsCart.image = task.result.toString()
+            Glide.with(context)
+                .load(productsCart.image)
+                .into(holder.imageView)
+        }
+            .addOnFailureListener{
+                Log.d("FailedCompleteListener",it.message.toString())
+            }
 
         holder.itemView.setOnClickListener{
             val option = arrayOf(
@@ -74,9 +89,7 @@ class CartAdapter(
             builder.create()
             builder.show()
         }
-        Glide.with(context)
-            .load("https://firebasestorage.googleapis.com/v0/b/dyplom-867af.appspot.com/o/Product%20Images%2Fimage%3A24Oct%2029%2C%20202114%3A11%3A02.jpg?alt=media&token=ed745a9f-2a68-47fe-a217-27efb6328609")
-            .into(holder.imageView)
+
 
     }
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -86,6 +99,7 @@ class CartAdapter(
         val imageView = itemView.findViewById(R.id.image_cart) as ImageView
         val elegantbutton = itemView.findViewById(R.id.number_count_cart) as ElegantNumberButton
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+        lateinit var bd: StorageReference
         val fAuth: FirebaseAuth = FirebaseAuth.getInstance()
         var userId:String = fAuth.currentUser!!.uid
     }

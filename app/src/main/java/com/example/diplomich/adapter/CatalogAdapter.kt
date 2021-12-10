@@ -15,8 +15,9 @@ import com.example.diplomich.R
 import com.example.diplomich.ViewModel.Products
 import com.example.diplomich.`interface`.ClickInteface
 import com.example.diplomich.*
-
-
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.main.popular_item.view.*
 
 
 class CatalogAdapter (var context: Context,
@@ -41,9 +42,16 @@ class CatalogAdapter (var context: Context,
                 holder.productName.text = products.name
                 holder.productPrice.text = products.price
                 holder.description.text = products.description
-                Glide.with(context)
-                    .load("https://firebasestorage.googleapis.com/v0/b/dyplom-867af.appspot.com/o/Product%20Images%2Fimage%3A24Oct%2029%2C%20202114%3A11%3A02.jpg?alt=media&token=ed745a9f-2a68-47fe-a217-27efb6328609")
-                    .into(holder.imageView)
+                holder.db = FirebaseStorage.getInstance().getReference("Product Images/")
+                holder.db.child("${products.pid}.jpg").downloadUrl.addOnCompleteListener{task->
+                    products.image = task.result.toString()
+                    Glide.with(context)
+                        .load(products.image)
+                        .into(holder.imageView.image_product)
+                }
+                    .addOnFailureListener{
+                        Log.d("D4cc",it.message.toString())
+                    }
                 holder.imageView.setOnClickListener {
                     val intent = Intent(holder.itemView.context, ProductDetailsActivity::class.java)
                     intent.putExtra("pid", products.pid)
@@ -70,6 +78,6 @@ class CatalogAdapter (var context: Context,
         val productPrice = itemView.findViewById(R.id.product_price) as TextView
         val description = itemView.findViewById(R.id.product_description) as TextView
         val imageView = itemView.findViewById(R.id.image_product) as ImageView
-
+        lateinit var db: StorageReference
 
     } }

@@ -58,7 +58,7 @@ class OrdersAdapter(
             Log.d("HOW",products.id.toString())
 
             val builder = AlertDialog.Builder(activity)
-                .setTitle("Are u sure?")
+                .setTitle("Do u want to remove this item?")
                 .setItems(option) { _, listener ->
                     when(listener){
                         0-> GlobalScope.launch {
