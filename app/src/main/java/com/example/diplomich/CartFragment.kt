@@ -89,7 +89,7 @@ private lateinit var db: FirebaseFirestore
                 }
             }
             for(eachPrice in city.indices){
-                totalCount += city[eachPrice].price?.toInt()!!
+                totalCount += city[eachPrice].Currentprice?.toInt()!!
 
             }
             totalPrice = totalCount.toString()

@@ -8,7 +8,7 @@ class UserOrders {
     var name:String?=null
     var phone:String?=null
     var time:String?=null
-
+    var totalCount:Int?=null
     constructor() {}
     constructor(
         id:String?,
@@ -17,7 +17,8 @@ class UserOrders {
         date: String?,
         name: String?,
         phone: String?,
-        time: String?
+        time: String?,
+        totalCount:Int?
     ) {
         this.id=id
         this.totalPrice = totalPrice
@@ -26,5 +27,6 @@ class UserOrders {
         this.name = name
         this.phone = phone
         this.time = time
+        this.totalCount = totalCount
     }
 }
