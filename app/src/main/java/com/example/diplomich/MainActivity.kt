@@ -132,22 +132,11 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("CommitPrefEdits")
     private fun setLocale(lang: String) {
         val locale: Locale = Locale(lang)
-       /* Locale.setDefault(locale)
-        val conf:Configuration = Configuration()
-        conf.locale = locale
-        this?.baseContext?.resources?.updateConfiguration(conf, this.baseContext.resources.displayMetrics)
-        val editor = this.getSharedPreferences("Settings", MODE_PRIVATE)?.edit()
-        editor?.putString("My Lang",lang)
-        editor?.apply()*/
-
         val res:Resources = resources
         val dm:DisplayMetrics = res.displayMetrics
         val conf:Configuration = res.configuration
         conf.locale = locale
         res.updateConfiguration(conf,dm)
-       /* val refresh = Intent(this, MainActivity::class.java)
-        finish()
-        startActivity(refresh)*/
         checkStateActivity()
     }
 
@@ -156,8 +145,6 @@ class MainActivity : AppCompatActivity() {
             MainActivity.counti.toString(),
             MODE_PRIVATE
         )
-        // проверяем, первый ли раз открывается программа
-        // проверяем, первый ли раз открывается программа
         val int = sp.getInt("hasFirst",count)
         if(int==0){
             counti.inc()

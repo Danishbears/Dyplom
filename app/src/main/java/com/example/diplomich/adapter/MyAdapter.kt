@@ -26,8 +26,6 @@ class MyAdapter(var context:Context,
 
     lateinit var onItemListener:ClickInteface
     var items = arrayListOf<String>()
-    //var itemsName = mutableListOf<String,String>()
-   // var itemsName = arrayMapOf(Pair(String,String))
     var itemsName = ArrayMap<String,String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAdapter.MyViewHolder {
@@ -68,9 +66,7 @@ class MyAdapter(var context:Context,
     }
 
     private fun checkTableItems(imageItem: String, name: String, pid: String?){
-       // items.add(imageItem)
         var sub = ".jpg"
-        //itemsName[name.substring(0,name.indexOf(".jpg"))] = imageItem
             itemsName[(name.substring(5, name.indexOf(".jpg")))] = imageItem
         Log.d("CheckItems",(name.substring(5,name.indexOf(".jpg"))))
 

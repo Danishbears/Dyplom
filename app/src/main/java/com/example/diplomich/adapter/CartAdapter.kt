@@ -71,23 +71,6 @@ class CartAdapter(
                 holder.db.collection("CartList").document(holder.userId)
                     .collection("ProductId").document(productsCart.pid!!)
                     .update("count", num.toString())
-
-
-          /*  else if(oldVal>newVal){
-                val num: String = holder.elegantbutton.number
-                val str = productsCart.price!!.toInt() / holder.elegantbutton.number.toInt()
-                Log.d("NewNew",str.toString())
-                val result = num.toInt() * str!!.toInt()
-                holder.productPrice.text = result.toString()
-                holder.db.collection("CartList").document(holder.userId)
-                    .collection("ProductId").document(productsCart.pid!!)
-                    .update("Currentprice", result.toString())
-                Log.d("elegantNumber", num)
-                productsCart.count = num.toString()
-                holder.db.collection("CartList").document(holder.userId)
-                    .collection("ProductId").document(productsCart.pid!!)
-                    .update("count", num.toString())
-            }*/
         }
 
         holder.elegantbutton.number = productsCart.count
