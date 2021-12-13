@@ -20,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.popular_item.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -73,7 +74,8 @@ class ProductDetailsActivity : AppCompatActivity() {
             "price" to productPrice.text.toString(),
             "discount" to "",
             "name" to productName.text.toString(),
-            "count" to "1")
+            "count" to "1",
+            "Currentprice" to "")
 
         var documentReference: DocumentReference = fStore.collection("CartList").document(userId)
             .collection("ProductId").document(productId)
@@ -97,9 +99,17 @@ class ProductDetailsActivity : AppCompatActivity() {
             productName.text = snapshot!!.getString("name")
             productDescription.text = snapshot.getString("description")
             productPrice.text = snapshot!!.getString("price")
-            Glide.with(this)
-                .load("https://firebasestorage.googleapis.com/v0/b/dyplom-867af.appspot.com/o/Product%20Images%2Fimage%3A24Oct%2029%2C%20202114%3A11%3A02.jpg?alt=media&token=ed745a9f-2a68-47fe-a217-27efb6328609")
-                .into(productImage)
+            var db: StorageReference
+            db = FirebaseStorage.getInstance().getReference("Product Images/")
+            db.child("${productId}.jpg").downloadUrl.addOnCompleteListener{task->
+                var productImageUrl = task.result.toString()
+                Glide.with(this)
+                    .load(productImageUrl)
+                    .into(productImage)
+            }
+                .addOnFailureListener{
+                    Log.d("D4cc",it.message.toString())
+                }
         }
     }
 

@@ -10,6 +10,7 @@ class Cart {
     var discount:String?=null
     var time: String? = null
     var count:String?=null
+    var Currentprice:String?=null
 
     constructor() {}
     constructor(
@@ -21,7 +22,8 @@ class Cart {
         pid: String?,
         date: String?,
         time: String?,
-        count:String?
+        count:String?,
+        Currentprice:String?
     ) {
         this.name = name
         this.description = description
@@ -32,6 +34,7 @@ class Cart {
         this.time = time
         this.discount = discount
         this.count = count
+        this.Currentprice = Currentprice
     }
 
 }

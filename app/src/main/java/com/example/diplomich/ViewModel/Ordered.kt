@@ -1,6 +1,6 @@
 package com.example.diplomich.ViewModel
 
-class UserOrders {
+class Ordered {
     var id:String?=null
     var totalPrice:String?=null
     var address:String?=null
@@ -8,7 +8,8 @@ class UserOrders {
     var name:String?=null
     var phone:String?=null
     var time:String?=null
-    var totalCount:Int?=null
+    var isChecked:Int?=null
+
     constructor() {}
     constructor(
         id:String?,
@@ -18,7 +19,7 @@ class UserOrders {
         name: String?,
         phone: String?,
         time: String?,
-        totalCount:Int?
+        isChecked:Int?
     ) {
         this.id=id
         this.totalPrice = totalPrice
@@ -27,6 +28,6 @@ class UserOrders {
         this.name = name
         this.phone = phone
         this.time = time
-        this.totalCount = totalCount
+        this.isChecked = isChecked
     }
 }

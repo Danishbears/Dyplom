@@ -97,7 +97,7 @@ class AdminAddProductActivity : AppCompatActivity() {
         productRandKey = saveCurrentDate + saveCurrentTime
 
 
-        val filePath:StorageReference = productImageRef.child(imageUri.lastPathSegment + productRandKey + ".jpg")
+        val filePath:StorageReference = productImageRef.child(productRandKey + ".jpg")
         uploadTask = filePath.putFile(imageUri)
         uploadTask.addOnFailureListener{
             val message:String = it.toString()

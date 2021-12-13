@@ -36,7 +36,7 @@ class AdminUserAdapter(var context: Context,
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val productsCart: Cart = list[position]
         holder.productName.text = productsCart.name
-        holder.productPrice.text = productsCart.price
+        holder.productPrice.text = productsCart.price.toString()
         holder.description.text = productsCart.description
 
 
