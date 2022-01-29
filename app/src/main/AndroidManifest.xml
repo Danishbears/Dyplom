@@ -20,6 +20,9 @@
             android:name=".SearchFragment"
             android:exported="false" />
         <activity
+            android:name=".Order.CardFormView"
+            android:exported="false" />
+        <activity
             android:name=".Admin.AdminViewUserProducts"
             android:exported="true"
             android:parentActivityName=".Admin.AdminNewOrderActivity" />
@@ -28,7 +31,7 @@
             android:exported="true"
             android:parentActivityName=".Admin.AdminActivity" />
         <activity
-            android:name=".ConfirmOrderActivity"
+            android:name=".Order.ConfirmOrderActivity"
             android:exported="true"
             android:parentActivityName=".MainActivity" />
         <activity

@@ -99,7 +99,7 @@ class OrdersAdapter(
         saveCurrentTime = currentTime.format(calForData.time)
         val orderMap: HashMap<String, Any> = hashMapOf(
             "id" to id.toString(),
-            "TotalPrice" to holder.productPrice.toString(),
+            "TotalPrice" to holder.productPrice.text.toString(),
             "date" to saveCurrentDate,
             "time" to  saveCurrentTime,
             "phone" to holder.phone.text.toString(),

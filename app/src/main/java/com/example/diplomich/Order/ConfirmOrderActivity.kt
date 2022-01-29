@@ -1,4 +1,4 @@
-package com.example.diplomich
+package com.example.diplomich.Order
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.diplomich.MainActivity
+import com.example.diplomich.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -58,12 +60,12 @@ class ConfirmOrderActivity : AppCompatActivity() {
         }
 
         editTextButton.setOnClickListener {
-            Check()
+            checkInputInformation()
         }
 
     }
 
-    private fun Check() {
+    private fun checkInputInformation() {
         if(TextUtils.isEmpty(editTextName.text.toString())){
             Toast.makeText(this," provide your Name",Toast.LENGTH_SHORT).show()
 
@@ -75,7 +77,6 @@ class ConfirmOrderActivity : AppCompatActivity() {
             Toast.makeText(this,"Not a valid phone number ",Toast.LENGTH_SHORT).show()
         }
         else{
-
             confirmOrder()
         }
     }
@@ -106,7 +107,7 @@ class ConfirmOrderActivity : AppCompatActivity() {
 
             Toast.makeText(this,"Order added successfully", Toast.LENGTH_SHORT).show()
             clearCart()
-            val intent = Intent(applicationContext,MainActivity::class.java)
+            val intent = Intent(applicationContext, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
             finish()

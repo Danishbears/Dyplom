@@ -69,4 +69,6 @@
     <string name="search">Search Product</string>
     <string name="ordered_time">Order time</string>
     <string name="empty_order">Empty Order List</string>
+    <string name="changeLanguage">Zmień język</string>
+    <string name="change_application_theme">Zmień motyw aplikacji</string>
 </resources>

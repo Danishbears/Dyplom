@@ -80,7 +80,9 @@ class CartAdapter(
         val str = productsCart.price!!.toInt()
         val result = num.toInt() * str!!.toInt()
         holder.productPrice.text = result.toString()
-
+        holder.db.collection("CartList").document(holder.userId)
+            .collection("ProductId").document(productsCart.pid!!)
+            .update("Currentprice", result.toString())
         /*holder.db.collection("CartList").document(holder.userId).collection("ProductId").
            get().addOnSuccessListener {documentSnapshot->
                val city = documentSnapshot.toObjects<Cart>()

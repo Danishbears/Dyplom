@@ -1,6 +1,5 @@
 package com.example.diplomich
 
-import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,17 +8,14 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.net.toUri
 import com.bumptech.glide.Glide
-import com.bumptech.glide.Registry
-import com.example.diplomich.ViewModel.Products
+import com.example.diplomich.Order.CardFormView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.popular_item.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -54,6 +50,16 @@ class ProductDetailsActivity : AppCompatActivity() {
         buttonCart.setOnClickListener {
             addToCart()
         }
+        buttonBuyNow.setOnClickListener {
+            /*val fragment: Fragment = CardFormView()
+            val fragmentManager: FragmentManager = supportFragmentManager
+            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.layoutReplace,fragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()*/
+
+            startActivity(Intent(applicationContext, CardFormView::class.java))
+        }
     }
 
     private fun addToCart() {
@@ -75,7 +81,7 @@ class ProductDetailsActivity : AppCompatActivity() {
             "discount" to "",
             "name" to productName.text.toString(),
             "count" to "1",
-            "Currentprice" to "")
+            "Currentprice" to "0")
 
         var documentReference: DocumentReference = fStore.collection("CartList").document(userId)
             .collection("ProductId").document(productId)
