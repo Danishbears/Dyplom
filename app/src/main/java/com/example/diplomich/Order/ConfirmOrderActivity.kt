@@ -16,6 +16,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.HashMap
 
 class ConfirmOrderActivity : AppCompatActivity() {
     private lateinit var textView: TextView
@@ -28,14 +29,13 @@ class ConfirmOrderActivity : AppCompatActivity() {
     private lateinit var fAuth: FirebaseAuth
     private lateinit var fStore: FirebaseFirestore
     private lateinit var userId:String
-
+    private lateinit var orderMap: HashMap<String,Any>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_order)
 
         totalPrice = intent.getStringExtra("Total price").toString()
-
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
@@ -91,7 +91,7 @@ class ConfirmOrderActivity : AppCompatActivity() {
         val currentTime: SimpleDateFormat = SimpleDateFormat("HH:mm:ss")
         saveCurrentTime = currentTime.format(calForData.time)
 
-        val orderMap: HashMap<String, Any> = hashMapOf(
+        orderMap = hashMapOf(
             "id" to userId,
             "TotalPrice" to totalPrice.toString(),
             "date" to saveCurrentDate,
@@ -100,22 +100,28 @@ class ConfirmOrderActivity : AppCompatActivity() {
             "name" to editTextName.text.toString(),
             "address" to editTextAddress.text.toString())
 
+            intentToCardFormView()
+    }
 
+    private fun addToDataBase(orderMap:HashMap<String,Any>){
         var documentReference: DocumentReference = fStore.collection("Orders").document(userId)
-        Toast.makeText(this,"Clicked",Toast.LENGTH_SHORT).show()
         documentReference.set(orderMap).addOnSuccessListener {
 
             Toast.makeText(this,"Order added successfully", Toast.LENGTH_SHORT).show()
             clearCart()
-            val intent = Intent(applicationContext, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            startActivity(intent)
-            finish()
+            //intentToCardFormView()
         }
             .addOnFailureListener{
                 Toast.makeText(this,"${it.message}",Toast.LENGTH_SHORT)
                     .show()
             }
+    }
+
+    private fun intentToCardFormView() {
+        val intent = Intent(this,CardFormView::class.java)
+       // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivityForResult(intent, 0)
+        //finish()
     }
 
     private fun clearCart() {
@@ -128,5 +134,16 @@ class ConfirmOrderActivity : AppCompatActivity() {
             .addOnFailureListener {
                 Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Toast.makeText(this,requestCode.toString(),Toast.LENGTH_SHORT).show()
+        if(resultCode == 0){
+            Toast.makeText(this,"Order has benn failed",Toast.LENGTH_SHORT).show()
+        }
+        if (resultCode == -1){
+            addToDataBase(orderMap)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

@@ -10,9 +10,13 @@ import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.diplomich.Order.CardFormView
+import com.example.diplomich.Order.ConfirmOrderActivity
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -58,7 +62,20 @@ class ProductDetailsActivity : AppCompatActivity() {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()*/
 
-            startActivity(Intent(applicationContext, CardFormView::class.java))
+
+            val documentRef = fStore.collection("Orders").document(userId)
+            documentRef.get().addOnCompleteListener {
+                if(it.isSuccessful){
+                    val document = it.result
+                    if(document!!.exists()){
+                        startActivity(Intent(applicationContext, CardFormView::class.java))
+                    }
+                    else{
+                        startActivity(Intent(applicationContext, ConfirmOrderActivity::class.java))
+                    }
+                }
+            }
+
         }
     }
 
