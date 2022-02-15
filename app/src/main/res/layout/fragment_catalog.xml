@@ -43,7 +43,7 @@
             android:id="@+id/mouse"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="26dp"
             android:layout_marginTop="32dp"
             android:src="@drawable/mouse"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
 
         <TextView
             android:id="@+id/mouse_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="22dp"
             android:layout_marginTop="32dp"
@@ -105,7 +105,7 @@
         android:id="@+id/gamepad"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="26dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/gamepad"
         app:layout_constraintStart_toStartOf="parent"
@@ -113,13 +113,12 @@
 
         <TextView
             android:id="@+id/gamepad_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="22dp"
             android:layout_marginTop="32dp"
             android:text="@string/GamePad"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -165,7 +164,7 @@
         android:id="@+id/phone"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="26dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/phone"
         app:layout_constraintStart_toStartOf="parent"
