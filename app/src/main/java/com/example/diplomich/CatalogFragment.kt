@@ -32,6 +32,10 @@ class CatalogFragment : Fragment() {
     private lateinit var layout6:View
     private var mouse:String = "mouse"
     private var keyboard:String = "keyboard"
+    private var gameController:String = "game controller"
+    private var monitor:String = "monitor"
+    private var phone:String = "phone"
+    private var videoCard:String = "video card"
     private lateinit var adminString:EditText
 
     override fun onCreateView(
@@ -71,6 +75,32 @@ class CatalogFragment : Fragment() {
             requireContext().startActivity(intent)
            // getFirestoreCollection(docRef,"keyboard")
         }
+
+        layout3.setOnClickListener {
+            val intent = Intent(requireActivity().applicationContext,FragmentCategory::class.java)
+            intent.putExtra("game controller",gameController)
+            requireContext().startActivity(intent)
+        }
+
+        layout4.setOnClickListener {
+            val intent = Intent(requireActivity().applicationContext,FragmentCategory::class.java)
+            intent.putExtra("monitor",monitor)
+            requireContext().startActivity(intent)
+        }
+
+        layout5.setOnClickListener {
+            val intent = Intent(requireActivity().applicationContext,FragmentCategory::class.java)
+            intent.putExtra("phone",phone)
+            requireContext().startActivity(intent)
+        }
+
+        layout6.setOnClickListener {
+            val intent = Intent(requireActivity().applicationContext,FragmentCategory::class.java)
+            intent.putExtra("video card",videoCard)
+            requireContext().startActivity(intent)
+        }
+
+
         return viewroot
     }
 

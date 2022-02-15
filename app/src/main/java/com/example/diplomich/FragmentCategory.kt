@@ -11,6 +11,7 @@ import com.example.diplomich.ViewModel.Cart
 import com.example.diplomich.ViewModel.Products
 import com.example.diplomich.adapter.CatalogAdapter
 import com.example.diplomich.adapter.MyAdapter
+import com.example.diplomich.common.Constants
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
@@ -18,6 +19,10 @@ import com.google.firebase.firestore.ktx.toObjects
 class FragmentCategory : AppCompatActivity() {
     private  var mouse:String =""
     private  var keyboard:String =""
+    private  var gameController =""
+    private  var monitor =""
+    private  var phone =""
+    private  var videoCard =""
     private lateinit var mDatabaseRef1: FirebaseFirestore
     private lateinit var mUploads:MutableList<Products>
     private lateinit var mRecyclerView: RecyclerView
@@ -34,6 +39,10 @@ class FragmentCategory : AppCompatActivity() {
 
         getKeyboardValue()
         getMouseValue()
+        getGameControllerValue()
+        getMonitorValue()
+        getPhoneNumber()
+        getVideoCard()
 
         mDatabaseRef1 = FirebaseFirestore.getInstance()
         mUploads = ArrayList()
@@ -57,27 +66,60 @@ class FragmentCategory : AppCompatActivity() {
         onStop()
     }
 
+    private fun getVideoCard() {
+        videoCard = intent.getStringExtra(Constants.VIDEO_CARD_ID).toString()
+    }
 
+    private fun getPhoneNumber() {
+        phone = intent.getStringExtra(Constants.PHONE_ID).toString()
+    }
+
+    private fun getMonitorValue() {
+        monitor = intent.getStringExtra(Constants.MONITOR_ID).toString()
+    }
+
+    private fun getGameControllerValue() {
+        gameController = intent.getStringExtra(Constants.GAME_CONTROLLER_ID).toString()
+    }
 
 
     private fun getKeyboardValue(){
-        keyboard = intent.getStringExtra("keyboard").toString()
+        keyboard = intent.getStringExtra(Constants.KEYBOARD_ID).toString()
     }
 
     private fun getMouseValue(){
-        mouse = intent.getStringExtra("mouse").toString()
+        mouse = intent.getStringExtra(Constants.MOUSE_ID).toString()
     }
 
     private fun intentSwitch(docRef: CollectionReference) {
 
-        if(mouse.contains("mouse")){
+        if(mouse.contains(Constants.MOUSE_ID)){
             getFirestoreCollection(docRef,mouse)
             return
         }
-        if(keyboard.contains("keyboard")){
+        if(keyboard.contains(Constants.KEYBOARD_ID)){
             getFirestoreCollection(docRef,keyboard)
             return
         }
+        if(gameController.contains(Constants.GAME_CONTROLLER_ID)){
+            getFirestoreCollection(docRef,gameController)
+            return
+        }
+        if(monitor.contains(Constants.MONITOR_ID)){
+            getFirestoreCollection(docRef,monitor)
+        }
+
+        if(phone.contains(Constants.PHONE_ID)){
+            getFirestoreCollection(docRef,phone)
+        }
+
+        if(videoCard.contains(Constants.VIDEO_CARD_ID)){
+            getFirestoreCollection(docRef,videoCard)
+        }
+        else{
+            Toast.makeText(this,R.string.NotFoundCategory.toString(),Toast.LENGTH_SHORT).show()
+        }
+
     }
 
 
@@ -86,7 +128,7 @@ class FragmentCategory : AppCompatActivity() {
             val city = documentSnapshot.toObjects<Products>()
             for(eachIndex in city.indices){
                 if(eachIndex!=null){
-                    if(city.get(eachIndex).category == category){
+                    if(city[eachIndex].category == category){
                     mUploads.add(city[eachIndex])}}
 
             }

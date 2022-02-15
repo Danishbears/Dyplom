@@ -16,6 +16,7 @@ import com.example.diplomich.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.delay
 
 
 class CardFormView :AppCompatActivity()
@@ -71,7 +72,7 @@ class CardFormView :AppCompatActivity()
          alertBuilder.setPositiveButton("Confirm",
              DialogInterface.OnClickListener { dialogInterface, i ->
                  dialogInterface.dismiss()
-                 Toast.makeText(this@CardFormView, "Thank you for purchase", Toast.LENGTH_SHORT)
+                 Toast.makeText(this@CardFormView, R.string.purchase.toString(), Toast.LENGTH_SHORT)
                      .show()
                  insertCardDataToDatabase()
              })

@@ -45,10 +45,6 @@ import android.os.Handler
 import android.util.DisplayMetrics
 import android.content.SharedPreferences
 
-
-
-
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var notificationBadges: View

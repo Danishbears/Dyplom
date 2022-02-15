@@ -71,4 +71,11 @@
     <string name="empty_order">Empty Order List</string>
     <string name="changeLanguage">Zmień język</string>
     <string name="change_application_theme">Zmień motyw aplikacji</string>
+    <string name="purchase">Dziękuję za zakup</string>
+    <string name="add_price">Dodaj cenę</string>
+    <string name="ConfirmPurchase">Potwierdź przed zakupem</string>
+    <string name="ChangeInputData">Czy chcesz zmienić to pole?</string>
+    <string name="ProvideNewData">Podaj nową informację o sobie!</string>
+    <string name="NotFoundCategory">Wybranej kategorii nie istnieje</string>
+
 </resources>

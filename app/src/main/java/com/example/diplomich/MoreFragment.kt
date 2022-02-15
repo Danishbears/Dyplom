@@ -2,30 +2,28 @@ package com.example.diplomich
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.Context
-import android.content.Context.MODE_PRIVATE
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputType
 import android.util.DisplayMetrics
 import android.util.Log
+import android.util.Patterns
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import com.example.diplomich.Authentication.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
-import okio.Timeout
 import java.util.*
+import java.util.regex.Pattern
 
 class MoreFragment : Fragment(){
     private lateinit var userEmail: TextView
@@ -40,6 +38,7 @@ class MoreFragment : Fragment(){
     private lateinit var languageButton:Button
     private lateinit var sharedPref:SharedPref
     private lateinit var mySwitch:SwitchCompat
+    private lateinit var userFirebase:FirebaseUser
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +47,7 @@ class MoreFragment : Fragment(){
         // Inflate the layout for this fragment
         val rootView: View = inflater.inflate(R.layout.fragment_more, container, false)
         //loadLocale()
-        userEmail = rootView.findViewById(R.id.userEmailInfo) as TextView
+        userEmail = rootView.findViewById(R.id.userEmailInfo)
         userPhone = rootView.findViewById(R.id.userPhoneNumber)
         userName = rootView.findViewById(R.id.HelloUserName)
         userPhoto = rootView.findViewById(R.id.imageUser)
@@ -59,6 +58,7 @@ class MoreFragment : Fragment(){
         fAuth = FirebaseAuth.getInstance()
         fStore = FirebaseFirestore.getInstance()
         userId = fAuth.currentUser!!.uid
+        userFirebase = FirebaseAuth.getInstance().currentUser!!
 
         buttonLogout = rootView.findViewById(R.id.logoutButton)
         buttonLogout.setOnClickListener{
@@ -118,7 +118,115 @@ class MoreFragment : Fragment(){
             userName.text = "${activity?.getString(R.string.HelloToUser)} ${snapshot!!.getString("Name")}"
             userEmail.text = snapshot!!.getString("Email")
         }
+
+        userEmail.setOnClickListener {
+            alertDialogToChangeData("Email")
+        }
+
+        userName.setOnClickListener{
+            alertDialogToChangeData("Name")
+        }
+
+        userPhone.setOnClickListener{
+            alertDialogToChangeData("PhoneNumber")
+        }
+
         return rootView
+    }
+
+    private fun alertDialogToChangeData(editableField: String) {
+        var dataEditText = EditText(activity)
+        dataEditText = setEditTextInputType(editableField,dataEditText)
+        val builder = view?.let { androidx.appcompat.app.AlertDialog.Builder(it.context) }
+        builder!!.setTitle(R.string.ChangeInputData)
+        builder.setMessage(R.string.ProvideNewData)
+        builder.setView(dataEditText)
+        builder.setPositiveButton(R.string.Yes){dialog,_ ->
+            when(editableField) {
+                "Email" -> {
+                    if (dataEditText.text.trim().isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(dataEditText.text.toString()).matches()) {
+                        checkIfDataAlreadyExists(dataEditText.text, editableField)
+                    } else {
+                        insertDataFailed(editableField)
+                    }
+                }
+                "Name" -> {
+                    if (dataEditText.text.trim().isNotEmpty()) {
+                            insertNewDataToDatabase(dataEditText.text, editableField)
+                        } else {
+                            insertDataFailed(editableField)
+                        }
+                    }
+                "PhoneNumber"->{
+                    if(dataEditText.text.trim().isNotEmpty()){
+                        checkIfDataAlreadyExists(dataEditText.text,editableField)
+                    }else{
+                        insertDataFailed(editableField)
+                    }
+                }
+            }
+               /* if(editableField == "Email") {
+                    if (dataEditText.text.isNotEmpty()) {
+                        checkIfEmailDataExists(dataEditText.text, editableField)
+                    } else {
+                        insertDataFailed(editableField)
+                    }
+                }
+            if(editableField == "Name"){
+                if(dataEditText.text.isNotEmpty()){
+                    insertNewDataToDatabase(dataEditText.text,editableField)
+                }
+                else{
+                    insertDataFailed(editableField)
+                }
+            }*/
+        }
+        builder.setNegativeButton(R.string.No,null)
+        builder.create().show()
+    }
+
+    private fun setEditTextInputType(editableField: String, dataEditText: EditText):EditText {
+        when(editableField){
+            "Email" -> dataEditText.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT
+            "PhoneNumber" -> dataEditText.inputType = InputType.TYPE_CLASS_NUMBER
+        }
+        return dataEditText
+    }
+
+    private fun checkIfDataAlreadyExists(text: Editable, editableField: String) {
+        fStore.collection("users")
+            .get()
+            .addOnSuccessListener { documents ->
+                var counter:Int = 0
+                for(documentOs in documents){
+                    if(documentOs.data.getValue(editableField) != text.toString()){
+                        counter +=1
+                    }
+                    else{
+                        counter -=1
+                    }
+                    if(counter == documents.size()){
+                        insertNewDataToDatabase(text,editableField)
+                    }
+                }
+                //insertNewDataToDatabase(text,editableField)
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(activity,exception.message,Toast.LENGTH_SHORT).show()
+
+            }
+    }
+
+    private fun insertDataFailed(editableField: String) {
+        if (editableField.isEmpty()){
+            Toast.makeText(activity,"Error",Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(activity,"Update data failed",Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun insertNewDataToDatabase(text: Editable, editableField: String) {
+        fStore.collection("users").document(userId).update(editableField,text.toString())
     }
 
     private fun changeColor() {

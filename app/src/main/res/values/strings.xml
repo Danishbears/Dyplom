@@ -71,5 +71,9 @@
     <string name="empty_order">Empty Order List</string>
     <string name="changeLanguage">Change Language</string>
     <string name="change_application_theme">Change application Theme</string>
-    
+    <string name="purchase">Thank you for purchase</string>
+    <string name="ConfirmPurchase">Confirm before purchase</string>
+    <string name="ChangeInputData">Do you want to change this field?</string>
+    <string name="ProvideNewData">Provide new information about yourself!</string>
+    <string name="NotFoundCategory">Failed, category does not exist</string>
 </resources>
