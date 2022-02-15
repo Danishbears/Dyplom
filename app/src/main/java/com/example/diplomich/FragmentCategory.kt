@@ -107,17 +107,21 @@ class FragmentCategory : AppCompatActivity() {
         }
         if(monitor.contains(Constants.MONITOR_ID)){
             getFirestoreCollection(docRef,monitor)
+            return
         }
 
         if(phone.contains(Constants.PHONE_ID)){
             getFirestoreCollection(docRef,phone)
+            return
         }
 
         if(videoCard.contains(Constants.VIDEO_CARD_ID)){
             getFirestoreCollection(docRef,videoCard)
+            return
         }
+
         else{
-            Toast.makeText(this,R.string.NotFoundCategory.toString(),Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,application.getString(R.string.NotFoundCategory),Toast.LENGTH_SHORT).show()
         }
 
     }
