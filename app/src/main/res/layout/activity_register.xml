@@ -35,12 +35,15 @@
 
     <EditText
         android:id="@+id/editLastName"
-        android:layout_width="401dp"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="15dp"
         android:layout_height="51dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:fontFamily="@font/aldrich"
+        app:layout_constraintHorizontal_bias="0.55"
         android:hint="@string/LastName"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editName"
@@ -50,13 +53,16 @@
 
     <EditText
         android:id="@+id/editName"
-        android:layout_width="401dp"
+        android:layout_width="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="5dp"
         android:layout_height="51dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:fontFamily="@font/aldrich"
         android:hint="@string/Name"
+        app:layout_constraintHorizontal_bias="0.55"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,11 +71,14 @@
 
     <EditText
         android:id="@+id/editPasswordAddress"
-        android:layout_width="401dp"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="15dp"
         android:layout_height="51dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/Password"
+        app:layout_constraintHorizontal_bias="0.55"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,12 +86,15 @@
 
     <EditText
         android:id="@+id/editTextPhone"
-        android:layout_width="401dp"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="15dp"
         android:layout_height="51dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:fontFamily="@font/aldrich"
+        app:layout_constraintHorizontal_bias="0.55"
         android:hint="@string/Phone"
         android:inputType="phone"
         app:layout_constraintBottom_toTopOf="@+id/editPasswordAddress"
@@ -92,7 +104,9 @@
 
     <EditText
         android:id="@+id/editEmailAddress"
-        android:layout_width="401dp"
+        android:layout_width="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="5dp"
         android:layout_height="51dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
@@ -100,6 +114,7 @@
         android:fontFamily="@font/aldrich"
         android:hint="@string/Email"
         android:inputType="textEmailAddress"
+        app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintBottom_toTopOf="@+id/editTextPhone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,10 +137,10 @@
         android:id="@+id/textToLogin"
         android:layout_width="187dp"
         android:layout_height="23dp"
-        android:layout_marginStart="100dp"
         android:layout_marginTop="8dp"
         android:text="@string/LoginText"
         android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RegistrationButton" />
 

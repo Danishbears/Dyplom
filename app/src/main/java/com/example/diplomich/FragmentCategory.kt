@@ -17,12 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
 
 class FragmentCategory : AppCompatActivity() {
-    private  var mouse:String =""
-    private  var keyboard:String =""
-    private  var gameController =""
-    private  var monitor =""
-    private  var phone =""
-    private  var videoCard =""
+    private lateinit var categoryName:String
     private lateinit var mDatabaseRef1: FirebaseFirestore
     private lateinit var mUploads:MutableList<Products>
     private lateinit var mRecyclerView: RecyclerView
@@ -37,12 +32,8 @@ class FragmentCategory : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_category)
 
-        getKeyboardValue()
-        getMouseValue()
-        getGameControllerValue()
-        getMonitorValue()
-        getPhoneNumber()
-        getVideoCard()
+
+        checkItemCategory()
 
         mDatabaseRef1 = FirebaseFirestore.getInstance()
         mUploads = ArrayList()
@@ -66,64 +57,36 @@ class FragmentCategory : AppCompatActivity() {
         onStop()
     }
 
-    private fun getVideoCard() {
-        videoCard = intent.getStringExtra(Constants.VIDEO_CARD_ID).toString()
+    private fun checkItemCategory() {
+        categoryName =  intent.extras!!.get("category").toString()
     }
 
-    private fun getPhoneNumber() {
-        phone = intent.getStringExtra(Constants.PHONE_ID).toString()
-    }
-
-    private fun getMonitorValue() {
-        monitor = intent.getStringExtra(Constants.MONITOR_ID).toString()
-    }
-
-    private fun getGameControllerValue() {
-        gameController = intent.getStringExtra(Constants.GAME_CONTROLLER_ID).toString()
-    }
-
-
-    private fun getKeyboardValue(){
-        keyboard = intent.getStringExtra(Constants.KEYBOARD_ID).toString()
-    }
-
-    private fun getMouseValue(){
-        mouse = intent.getStringExtra(Constants.MOUSE_ID).toString()
-    }
 
     private fun intentSwitch(docRef: CollectionReference) {
 
-        if(mouse.contains(Constants.MOUSE_ID)){
-            getFirestoreCollection(docRef,mouse)
-            return
+        when(categoryName){
+            Constants.MOUSE_ID ->{
+                getFirestoreCollection(docRef,categoryName)
+            }
+            Constants.KEYBOARD_ID->{
+                getFirestoreCollection(docRef,categoryName)
+            }
+            Constants.GAME_CONTROLLER_ID->{
+                getFirestoreCollection(docRef,categoryName)
+            }
+            Constants.MONITOR_ID->{
+                getFirestoreCollection(docRef,categoryName)
+            }
+            Constants.PHONE_ID->{
+                getFirestoreCollection(docRef,categoryName)
+            }
+            Constants.VIDEO_CARD_ID->{
+                getFirestoreCollection(docRef,categoryName)
+            }
+            else->{
+                Toast.makeText(this,application.getString(R.string.NotFoundCategory),Toast.LENGTH_SHORT).show()
+            }
         }
-        if(keyboard.contains(Constants.KEYBOARD_ID)){
-            getFirestoreCollection(docRef,keyboard)
-            return
-        }
-        if(gameController.contains(Constants.GAME_CONTROLLER_ID)){
-            getFirestoreCollection(docRef,gameController)
-            return
-        }
-        if(monitor.contains(Constants.MONITOR_ID)){
-            getFirestoreCollection(docRef,monitor)
-            return
-        }
-
-        if(phone.contains(Constants.PHONE_ID)){
-            getFirestoreCollection(docRef,phone)
-            return
-        }
-
-        if(videoCard.contains(Constants.VIDEO_CARD_ID)){
-            getFirestoreCollection(docRef,videoCard)
-            return
-        }
-
-        else{
-            Toast.makeText(this,application.getString(R.string.NotFoundCategory),Toast.LENGTH_SHORT).show()
-        }
-
     }
 
 

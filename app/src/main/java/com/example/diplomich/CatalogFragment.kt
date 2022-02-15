@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.diplomich.ViewModel.Products
 import com.example.diplomich.ViewModel.UserOrders
 import com.example.diplomich.adapter.*
+import com.example.diplomich.common.Constants
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.*
 import com.google.firebase.firestore.CollectionReference
@@ -64,39 +65,39 @@ class CatalogFragment : Fragment() {
 
         layout1.setOnClickListener {
             val intent = Intent(requireActivity().applicationContext,FragmentCategory::class.java)
-            intent.putExtra("mouse",mouse)
+            intent.putExtra("category",Constants.MOUSE_ID)
             requireContext().startActivity(intent)
           //  getFirestoreCollection(docRef,"mouse")
         }
 
         layout2.setOnClickListener {
             val intent = Intent(requireActivity().applicationContext,FragmentCategory::class.java)
-            intent.putExtra("keyboard",keyboard)
+            intent.putExtra("category",Constants.KEYBOARD_ID)
             requireContext().startActivity(intent)
            // getFirestoreCollection(docRef,"keyboard")
         }
 
         layout3.setOnClickListener {
             val intent = Intent(requireActivity().applicationContext,FragmentCategory::class.java)
-            intent.putExtra("game controller",gameController)
+            intent.putExtra("category",Constants.GAME_CONTROLLER_ID)
             requireContext().startActivity(intent)
         }
 
         layout4.setOnClickListener {
             val intent = Intent(requireActivity().applicationContext,FragmentCategory::class.java)
-            intent.putExtra("monitor",monitor)
+            intent.putExtra("category",Constants.MONITOR_ID)
             requireContext().startActivity(intent)
         }
 
         layout5.setOnClickListener {
             val intent = Intent(requireActivity().applicationContext,FragmentCategory::class.java)
-            intent.putExtra("phone",phone)
+            intent.putExtra("category",Constants.PHONE_ID)
             requireContext().startActivity(intent)
         }
 
         layout6.setOnClickListener {
             val intent = Intent(requireActivity().applicationContext,FragmentCategory::class.java)
-            intent.putExtra("video card",videoCard)
+            intent.putExtra("category",Constants.VIDEO_CARD_ID)
             requireContext().startActivity(intent)
         }
 

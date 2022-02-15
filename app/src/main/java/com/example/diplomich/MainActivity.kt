@@ -44,6 +44,9 @@ import android.content.res.Resources
 import android.os.Handler
 import android.util.DisplayMetrics
 import android.content.SharedPreferences
+import com.example.diplomich.Admin.AdminActivity
+import kotlinx.android.synthetic.main.fragment_catalog.*
+import kotlinx.coroutines.delay
 
 class MainActivity : AppCompatActivity() {
 
@@ -78,6 +81,8 @@ class MainActivity : AppCompatActivity() {
         GlobalScope.launch {
             checkOrders()
         }
+
+        loadUserConfiguration()
 
        // nightCheck()
        //languageCheck()
@@ -203,7 +208,42 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView.addView(notificationBadges)
     }
-companion object{
+
+    private fun loadUserConfiguration() {
+        GlobalScope.launch {
+            checkTypeOfUser()
+            delay(500)
+        }
+    }
+
+    private fun checkTypeOfUser(){
+        val doc = returnUserFromDatabase()
+        doc.addSnapshotListener{snapshot, e->
+            if (e != null) {
+                Log.d("TAG", "Failed to read data from Firestore ${e.message}")
+                return@addSnapshotListener
+            }
+
+            if(snapshot?.getString("isAdmin") == "1"){
+                loadAdminScreen()
+            }
+        }
+
+    }
+
+
+    private fun loadAdminScreen() {
+        val adminIntent = Intent(this,AdminActivity::class.java)
+        startActivity(adminIntent)
+        finish()
+    }
+
+    private fun returnUserFromDatabase(): DocumentReference = fr.collection("users").document(uid)
+
+
+
+
+    companion object{
     private val counti:Int = 1
 }
 

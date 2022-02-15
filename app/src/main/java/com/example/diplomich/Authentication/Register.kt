@@ -106,7 +106,6 @@ class Register : AppCompatActivity() {
                 Log.d("TAG", "onSuccess: user profile is created for$userId")
             }
             startActivity(Intent(applicationContext,MainActivity::class.java))
-
         }else{
             Toast.makeText(this," ERROR! " + task.exception!!.message,Toast.LENGTH_SHORT).show()
         }

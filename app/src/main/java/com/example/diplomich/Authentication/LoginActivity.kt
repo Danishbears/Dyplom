@@ -84,7 +84,8 @@ class LoginActivity : AppCompatActivity() {
            task ->
             task.user?.let {
                 progressBar.visibility = View.VISIBLE
-                checkUserLevel(it.uid) }
+                checkUserLevel(it.uid)
+            }
         }
             .addOnFailureListener{
                 Toast.makeText(this,"Not valid information",Toast.LENGTH_SHORT).show()
