@@ -13,8 +13,13 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/drawable/search_style.xml" value="0.2703125" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/font/aldrich.xml" value="0.28" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/font/allan_bold.xml" value="0.28" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout-land/activity_admin.xml" value="0.21516754850088182" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout-land/activity_admin_add_product.xml" value="0.21516754850088182" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout-land/activity_login.xml" value="0.21516754850088182" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout-land/activity_product_details.xml" value="0.21516754850088182" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout-land/activity_register.xml" value="0.21516754850088182" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout-land/fragment_catalog.xml" value="0.21516754850088182" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout-land/fragment_more.xml" value="0.21516754850088182" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_admin.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_admin_add_product.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/activity_admin_new_order.xml" value="0.1" />
@@ -37,7 +42,7 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/fragment_more.xml" value="0.1947463768115942" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/fragment_search.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/home_products.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/home_products.xml" value="0.2" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/notification_view.xml" value="0.17391304347826086" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/orders_layout.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/Diplomich/app/src/main/res/layout/popular_item.xml" value="0.1" />
